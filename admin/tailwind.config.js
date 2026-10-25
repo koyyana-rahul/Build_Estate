@@ -1,0 +1,93 @@
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        // BuildEstate Premium Navy + Warm Ivory + Muted Gold
+        cream: {
+          DEFAULT: '#F7F5F0',
+          50: '#FBFAF7',
+          100: '#F7F5F0',
+          200: '#EEF3F8',
+        },
+        navy: {
+          DEFAULT: '#142C4E',
+          50: '#EEF3F8',
+          100: '#DCE6F0',
+          200: '#B7C9DF',
+          300: '#8EA9CC',
+          400: '#5E83B4',
+          500: '#3A6499',
+          600: '#274E7F',
+          700: '#1B3A62',
+          800: '#142C4E',
+          900: '#0F2340',
+        },
+        gold: {
+          DEFAULT: '#C6A56B',
+          50: '#F7F2E8',
+          100: '#EFE5D1',
+          200: '#E2CEA8',
+          300: '#D4B583',
+          400: '#C6A56B',
+          500: '#B38E4F',
+          600: '#9A7840',
+          700: '#7F6233',
+        },
+        dark: {
+          DEFAULT: '#253247',
+          50: '#F7F5F0',
+          100: '#EEF3F8',
+          200: '#D9E2EC',
+          300: '#BCCCDC',
+          400: '#829AB1',
+          500: '#687386',
+          600: '#48556A',
+          700: '#323F54',
+          800: '#253247',
+          900: '#1A2433',
+        },
+        sand: {
+          DEFAULT: '#E5E7EB',
+          50: '#F9FAFB',
+          100: '#F3F4F6',
+          200: '#E5E7EB',
+          300: '#D1D5DB',
+          400: '#9CA3AF',
+        },
+        muted: '#687386',
+        success: '#287A55',
+        warning: '#B7791F',
+        error: '#C2413B',
+        info: '#315B78',
+      },
+      fontFamily: {
+        'sans': ['Manrope', 'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        'body': ['Manrope', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gradient-navy': 'linear-gradient(135deg, #142C4E, #0F2340)',
+        'gradient-dark': 'linear-gradient(135deg, #253247, #1A2433)',
+      },
+      boxShadow: {
+        'terracotta': '0 4px 14px 0 rgba(20, 44, 78, 0.25)',
+        'navy': '0 4px 14px 0 rgba(20, 44, 78, 0.25)',
+        'card': '0 1px 3px 0 rgba(37, 50, 71, 0.06), 0 1px 2px -1px rgba(37, 50, 71, 0.06)',
+        'card-hover': '0 10px 25px -5px rgba(37, 50, 71, 0.1), 0 8px 10px -6px rgba(37, 50, 71, 0.1)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.3s ease-in-out',
+        'slide-up': 'slideUp 0.4s ease-out',
+      },
+      keyframes: {
+        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        slideUp: { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+      },
+    },
+  },
+  plugins: [],
+}

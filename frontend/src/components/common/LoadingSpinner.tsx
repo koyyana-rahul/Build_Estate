@@ -1,0 +1,18 @@
+import React from 'react';
+
+// Placeholder for LoadingSpinner component
+// Will be implemented in the next iteration
+
+const LoadingSpinner: React.FC<{ message: string }> = ({ message }) => {
+  return (
+    <div className="flex items-center justify-center py-12">
+      <div className="relative w-12 h-12">
+        <div className="absolute inset-0 border-4 border-[#e5e7eb] rounded-full" />
+        <div className="absolute inset-0 border-4 border-[#142c4e] border-t-transparent rounded-full animate-spin" />
+      </div>
+      <span className="font-manrope text-sm text-[#687386]">{message}</span>
+    </div>
+  );
+};
+
+export default LoadingSpinner;

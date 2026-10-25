@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand-navy: #142c4e;
+    --color-brand-navy-dark: #0f2340;
+    --color-brand-gold: #c6a56b;
+    --color-background: #f7f5f0;
+    --color-surface: #ffffff;
+    --color-text: #253247;
+    --color-text-muted: #687386;
+    --color-border: #e5e7eb;
+    --color-section: #eef3f8;
+    --color-success: #287a55;
+    --color-warning: #b7791f;
+    --color-error: #c2413b;
+    --color-info: #315b78;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: "Manrope", sans-serif;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  h1 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; line-height: 1.2; }
+  h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 600; line-height: 1.25; }
+  h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+  h4 { font-size: 1.125rem; font-weight: 600; line-height: 1.35; }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7f5f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #142c4e;
+  border-radius: 10px;
+  opacity: 0.6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0f2340;
+}
+
+/* Focus ring override for brand color */
+.focus-terracotta:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(20, 44, 78, 0.25);
+  border-color: #142c4e;
+}
+
+/* Shared admin primitives keep surfaces, controls, and focus states aligned. */
+@layer components {
+  .admin-surface {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(37, 50, 71, 0.06);
+  }
+
+  .admin-primary-button {
+    background: var(--color-brand-navy);
+    color: #fff;
+    border-radius: 0.625rem;
+    font-weight: 600;
+  }
+
+  .admin-primary-button:hover {
+    background: var(--color-brand-navy-dark);
+  }
+
+  .admin-secondary-button {
+    background: var(--color-surface);
+    color: var(--color-brand-navy);
+    border: 1px solid var(--color-border);
+    border-radius: 0.625rem;
+    font-weight: 600;
+  }
+
+  .admin-secondary-button:hover {
+    background: var(--color-section);
+  }
+
+  .admin-control:focus-visible,
+  .admin-primary-button:focus-visible,
+  .admin-secondary-button:focus-visible {
+    outline: 3px solid rgba(198, 165, 107, 0.55);
+    outline-offset: 2px;
+  }
+}
+
+/* Smooth transitions for interactive elements */
+button,
+a,
+input,
+select,
+textarea {
+  transition-property:
+    color, background-color, border-color, box-shadow, opacity, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}

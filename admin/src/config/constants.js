@@ -1,0 +1,26 @@
+// Configuration constants
+const configuredBackendUrl = import.meta.env.VITE_BACKEND_URL?.trim();
+
+export const backendurl = configuredBackendUrl
+  ? configuredBackendUrl.replace(/\/+$/, '')
+  : import.meta.env.DEV
+    ? 'http://localhost:4000'
+    : (() => {
+        throw new Error('VITE_BACKEND_URL is required for production builds.');
+      })();
+
+// API endpoints
+export const API_ENDPOINTS = {
+  login: '/api/users/admin',
+  properties: '/api/products',
+  appointments: '/api/appointments',
+  users: '/api/users',
+  admin: '/api/admin'
+};
+
+// App constants
+export const APP_CONSTANTS = {
+  TOKEN_KEY: 'token',
+  IS_ADMIN_KEY: 'isAdmin',
+  DEFAULT_TOAST_DURATION: 3000
+};
