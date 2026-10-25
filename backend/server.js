@@ -128,7 +128,8 @@ const defaultDevOrigins = [
 ];
 
 const allowedOrigins = [
-  ...(process.env.NODE_ENV === 'production' ? productionOrigins : defaultDevOrigins),
+  ...productionOrigins,
+  ...(process.env.NODE_ENV === 'production' ? [] : defaultDevOrigins),
   ...(process.env.NODE_ENV === 'production'
     ? configuredOrigins.filter((origin) => !isLocalOrigin(origin))
     : configuredOrigins),
