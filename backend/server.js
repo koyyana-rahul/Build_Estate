@@ -105,13 +105,20 @@ const parseCsv = (value = '') =>
     .map((v) => v.trim())
     .filter(Boolean);
 
-const envOrigins = [
+const productionOrigins = [
+  'https://aavasa-users.vercel.app',
+  'https://aavasa-realestate.vercel.app',
+];
+
+const configuredOrigins = [
   process.env.FRONTEND_URL,
   process.env.ADMIN_URL,
   process.env.WEBSITE_URL,
-  ...parseCsv(process.env.LOCAL_URLS || ''),
   ...parseCsv(process.env.EXTRA_ALLOWED_ORIGINS || ''),
 ].filter(Boolean);
+
+const localOrigins = parseCsv(process.env.LOCAL_URLS || '');
+const isLocalOrigin = (origin) => /^https?:\/\/localhost(?::\d+)?$/i.test(origin);
 
 const defaultDevOrigins = [
   'http://localhost:4000',
@@ -121,8 +128,11 @@ const defaultDevOrigins = [
 ];
 
 const allowedOrigins = [
-  ...(process.env.NODE_ENV === 'production' ? [] : defaultDevOrigins),
-  ...envOrigins,
+  ...(process.env.NODE_ENV === 'production' ? productionOrigins : defaultDevOrigins),
+  ...(process.env.NODE_ENV === 'production'
+    ? configuredOrigins.filter((origin) => !isLocalOrigin(origin))
+    : configuredOrigins),
+  ...(process.env.NODE_ENV === 'production' ? [] : localOrigins),
 ];
 
 const uniqueAllowedOrigins = [...new Set(allowedOrigins)];
@@ -145,7 +155,14 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Github-Key', 'X-Firecrawl-Key', 'X-Nvidia-Key']
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'X-Github-Key',
+    'X-Firecrawl-Key',
+    'X-Nvidia-Key',
+  ],
 }));
 
 // Database connection
