@@ -6,7 +6,6 @@ import {
   Calendar,
   LogOut,
   LayoutDashboard,
-  Bell,
   User,
   ClipboardList,
   Users,
@@ -18,6 +17,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import apiClient from '../services/apiClient';
+import AdminNotifications from './AdminNotifications';
 
 const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
   const navigate = useNavigate();
@@ -214,19 +214,10 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
         <div className="border-t border-white/10 p-4 flex-shrink-0">
           {/* Notifications */}
           <div className={cn(isCollapsed && 'lg:hidden')}>
-            <button className="w-full flex items-center gap-3 px-3 py-2.5 mb-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-medium" aria-label="Notifications">
-              <Bell className="h-5 w-5" />
-              <span className="flex-1 text-left">Notifications</span>
-              <span className="h-5 w-5 bg-[#142c4e] text-white text-xs flex items-center justify-center rounded-full">
-                3
-              </span>
-            </button>
+            <AdminNotifications />
           </div>
           <div className={cn('hidden items-center justify-center', isCollapsed && 'lg:flex')}>
-            <button className="w-full flex items-center justify-center px-3 py-2.5 mb-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 relative" aria-label="Notifications">
-              <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 bg-[#142c4e] text-white text-[10px] flex items-center justify-center rounded-full">3</span>
-            </button>
+            <AdminNotifications compact />
           </div>
 
           {/* Profile */}

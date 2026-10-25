@@ -42,6 +42,41 @@
 }
 
 @layer utilities {
+  .skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+    background: #e5e7eb;
+  }
+
+  .skeleton-shimmer::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.62), transparent);
+    animation: aavasa-skeleton-shimmer 1.5s ease-in-out infinite;
+  }
+
+  .animate-pulse {
+    animation: aavasa-skeleton-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes aavasa-skeleton-shimmer {
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes aavasa-skeleton-pulse {
+    0%, 100% { opacity: 0.62; }
+    50% { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton-shimmer::after,
+    .animate-pulse {
+      animation: none;
+    }
+  }
+
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

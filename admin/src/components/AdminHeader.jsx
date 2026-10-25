@@ -1,4 +1,5 @@
-import { Bell, ChevronRight, Menu } from 'lucide-react';
+import { ChevronRight, Menu } from 'lucide-react';
+import AdminNotifications from './AdminNotifications';
 
 const AdminHeader = ({ onMenuClick }) => {
   return (
@@ -19,14 +20,7 @@ const AdminHeader = ({ onMenuClick }) => {
         </div>
       </div>
 
-      <button
-        type="button"
-        className="relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#e5e7eb] bg-white text-[#687386] hover:border-[#c6a56b] hover:text-[#142c4e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c6a56b]"
-        aria-label="View notifications"
-      >
-        <Bell className="h-5 w-5" />
-        <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#c6a56b]" aria-hidden="true" />
-      </button>
+      <AdminNotifications compact />
     </header>
   );
 };

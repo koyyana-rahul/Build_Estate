@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { Home, User, LogOut, Menu, X as XIcon, Plus, Heart } from 'lucide-react';
+import UserNotifications from './UserNotifications';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -126,6 +127,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-3">
             {isAuthenticated && user ? (
               <>
+                <UserNotifications />
                 <Link
                   to="/add-property"
                   className="text-sm font-semibold flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover hover:shadow-md transition-colors active:scale-[0.97]"
@@ -263,6 +265,10 @@ const Navbar: React.FC = () => {
                     <p className="px-4 text-[11px] text-muted-foreground uppercase tracking-wider mb-1">
                       Signed in as
                     </p>
+                    <div className="flex items-center justify-between px-4 py-2">
+                      <span className="text-sm font-medium text-foreground-soft">Notifications</span>
+                      <UserNotifications />
+                    </div>
                     <Link
                       to="/dashboard"
                       className="flex items-center gap-2 px-4 py-3 text-base font-medium text-foreground-soft hover:text-primary transition-colors"
