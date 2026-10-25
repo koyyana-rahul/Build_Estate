@@ -22,9 +22,9 @@ const CuratedListingsSection: React.FC = () => {
         </svg>
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-8 relative z-10">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex justify-between items-center mb-16">
+        <div className="flex flex-col items-start gap-5 sm:flex-row sm:justify-between sm:items-center mb-10 sm:mb-16">
           <div>
             <div className="font-space-mono text-sm text-[#142c4e] uppercase tracking-widest mb-4">Exclusive Selection</div>
             <h2 className="font-fraunces text-5xl text-[#253247]">Curated Listings</h2>
@@ -41,7 +41,7 @@ const CuratedListingsSection: React.FC = () => {
 
           {/* Large Featured Property */}
           <div className="col-span-12 md:col-span-8 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] relative group">
-            <div className="relative h-[500px]">
+            <div className="relative h-[380px] sm:h-[500px]">
               <img 
                 src={propertyImages[0]} 
                 alt="The Glass Pavilion luxury villa in Montecito California" 
@@ -74,7 +74,7 @@ const CuratedListingsSection: React.FC = () => {
 
           {/* Small Property Card */}
           <div className="col-span-12 md:col-span-4 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] relative group">
-            <div className="relative h-[500px]">
+            <div className="relative h-[380px] sm:h-[500px]">
               <img 
                 src={propertyImages[1]} 
                 alt="Skyline Penthouse luxury apartment in New York NY" 
@@ -92,7 +92,7 @@ const CuratedListingsSection: React.FC = () => {
 
           {/* Desert Oasis */}
           <div className="col-span-12 md:col-span-4 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] aspect-square">
-            <div className="relative h-full">
+            <div className="relative h-full min-h-[360px]">
               <img 
                 src={propertyImages[2]} 
                 alt="Desert Oasis modern home in Joshua Tree CA" 
@@ -110,7 +110,7 @@ const CuratedListingsSection: React.FC = () => {
 
           {/* Coastal Retreat */}
           <div className="col-span-12 md:col-span-8 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] relative">
-            <div className="relative h-[800px]">
+            <div className="relative h-[500px] sm:h-[800px]">
               <img 
                 src={propertyImages[3]} 
                 alt="Coastal Retreat mansion in Malibu California" 
@@ -123,9 +123,9 @@ const CuratedListingsSection: React.FC = () => {
                 <p className="font-manrope text-white/70 mb-6">Malibu, California</p>
                 <div className="border-t border-white/20 pt-6 flex items-center justify-between">
                   <span className="font-space-mono text-white">$15,000,000</span>
-                  <button className="text-white hover:bg-white/10 p-2 rounded-full transition-all" aria-label="View Coastal Retreat">
+                  <Link to="/properties" className="text-white hover:bg-white/10 p-2 rounded-full transition-all" aria-label="View Coastal Retreat">
                     <span className="font-material-icons text-2xl" aria-hidden="true">arrow_forward</span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

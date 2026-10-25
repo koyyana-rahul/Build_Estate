@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProcessSection: React.FC = () => {
   return (
     <section className="bg-[#f7f5f0] py-24">
-      <div className="max-w-[1280px] mx-auto px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Left - Sticky Content */}
           <div className="lg:col-span-4">
@@ -17,9 +18,9 @@ const ProcessSection: React.FC = () => {
                 We've simplified the complex journey of buying a home into four seamless, AI-
                 assisted steps.
               </p>
-              <button className="bg-[#253247] text-white font-manrope font-medium px-8 py-3 rounded-lg shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:bg-[#253247] transition-all">
+              <Link to="/properties" className="inline-block bg-[#253247] text-white font-manrope font-medium px-8 py-3 rounded-lg shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:bg-[#142c4e] transition-all">
                 Start Your Journey
-              </button>
+              </Link>
             </div>
           </div>
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import homeTexture from '../../images/Abstract architectural texture with light and shadow.png';
 
 const CTASection: React.FC = () => {
   return (
     <section className="bg-[#142c4e] py-24 relative overflow-hidden">
       {/* Background Pattern */}
         <img
-          src="/src/images/Abstract architectural texture with light and shadow.png"
+          src={homeTexture}
           alt=""
           loading="lazy"
           decoding="async"
@@ -15,14 +16,14 @@ const CTASection: React.FC = () => {
         />
         <div className="absolute top-0 left-1/4 w-96"/>
 
-      <div className="max-w-[1280px] mx-auto px-8 text-center relative z-10">
-        <h2 className="font-fraunces text-5xl text-white mb-6">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center relative z-10">
+        <h2 className="font-fraunces text-4xl sm:text-5xl text-white mb-6">
           Ready to Find Your Dream Home?
         </h2>
         <p className="font-manrope font-light text-xl text-white/90 mb-10 max-w-[680px] mx-auto">
           Join thousands of satisfied homeowners who found their perfect property with Aavasa's AI-powered platform.
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/signup" className="bg-white text-[#142c4e] font-manrope font-bold text-lg px-10 py-4 rounded-xl shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:shadow-2xl transition-all inline-block">
             Get Started
           </Link>
