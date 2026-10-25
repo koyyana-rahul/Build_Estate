@@ -238,6 +238,12 @@ const PropertyListings = () => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
+  const hasActiveFilters = Boolean(searchTerm || filterType !== "all");
+  const clearFilters = () => {
+    setSearchTerm("");
+    setFilterType("all");
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen pt-8 flex items-center justify-center bg-[#f7f5f0]">
@@ -260,6 +266,7 @@ const PropertyListings = () => {
             <h1 className="text-2xl sm:text-3xl font-bold text-[#253247] mb-1">Properties</h1>
             <p className="text-[#687386] text-sm">
               <span className="font-semibold text-[#142c4e]">{filteredProperties.length}</span> listings found
+              {hasActiveFilters && <span> with current filters</span>}
             </p>
           </div>
           <div className="flex w-full sm:w-auto items-center gap-2">
@@ -327,6 +334,12 @@ const PropertyListings = () => {
                   <ListIcon className="w-4 h-4" />
                 </button>
               </div>
+              {hasActiveFilters && (
+                <button type="button" onClick={clearFilters}
+                  className="shrink-0 px-3 py-2.5 text-xs font-semibold text-[#142c4e] hover:bg-[#eef3f8] rounded-xl transition-colors">
+                  Clear
+                </button>
+              )}
             </div>
           </div>
         </motion.div>
@@ -341,9 +354,14 @@ const PropertyListings = () => {
               </div>
               <h3 className="text-lg font-bold text-[#253247] mb-2">No properties found</h3>
               <p className="text-sm text-[#687386] mb-6">
-                {searchTerm || filterType !== "all" ? "Try adjusting your search or filters" : "Add your first property to get started"}
+                {hasActiveFilters ? "Try adjusting your search or filters" : "Add your first property to get started"}
               </p>
-              {!searchTerm && filterType === "all" && (
+              {hasActiveFilters ? (
+                <button type="button" onClick={clearFilters}
+                  className="px-6 py-3 bg-[#eef3f8] text-[#142c4e] rounded-xl font-semibold text-sm hover:bg-[#e2eaf2] transition-colors">
+                  Clear Filters
+                </button>
+              ) : (
                 <Link to="/add">
                   <button className="px-6 py-3 bg-[#142c4e] text-white rounded-xl font-semibold text-sm hover:bg-[#0f2340] transition-colors">
                     Add First Property

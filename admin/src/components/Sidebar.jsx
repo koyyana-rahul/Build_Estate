@@ -14,7 +14,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Building2,
-  Menu,
   Cpu,
 } from 'lucide-react';
 import { cn } from '../lib/utils';
@@ -287,20 +286,6 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
         )}
       </AnimatePresence>
 
-      {/* Mobile Toggle Button */}
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-40 rounded-lg border border-white/10 bg-[#142c4e] p-2.5 text-[#f7f5f0] shadow-lg lg:hidden"
-        aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
-        aria-expanded={isOpen}
-      >
-        {isOpen ? (
-          <ChevronLeft className="h-5 w-5" />
-        ) : (
-          <Menu className="h-5 w-5" />
-        )}
-      </button>
     </>
   );
 };

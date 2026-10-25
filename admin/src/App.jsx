@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 // Components
 import Sidebar from "./components/Sidebar";
+import AdminHeader from "./components/AdminHeader";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ErrorFallback from "./components/ErrorFallback";
 
@@ -62,6 +63,7 @@ const AppLayout = () => {
           !isLoginPage && isSidebarCollapsed && "lg:ml-20" // Smaller margin for collapsed sidebar
         )}
       >
+        {!isLoginPage && <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} />}
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -71,7 +73,6 @@ const AppLayout = () => {
             exit="exit"
             className={cn(
               "flex-1",
-              !isLoginPage && "pt-16 lg:pt-0"
             )}
           >
             <Routes location={location}>

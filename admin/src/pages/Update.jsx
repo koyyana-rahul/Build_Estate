@@ -9,6 +9,8 @@ import { cn } from '../lib/utils';
 
 const PROPERTY_TYPES = ['House', 'Apartment', 'Office', 'Villa'];
 const AVAILABILITY_TYPES = ['rent', 'buy'];
+const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 const inputClass = "w-full px-4 py-3 bg-white border border-[#e5e7eb] rounded-xl text-[#253247] placeholder-[#687386] text-sm transition-all duration-200 outline-none focus:border-[#142c4e] focus:ring-2 focus:ring-[#142c4e]/15";
 const labelClass = "block text-sm font-semibold text-[#253247] mb-2";
@@ -92,6 +94,21 @@ const Update = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
+    if (files.some((file) => !ACCEPTED_IMAGE_TYPES.includes(file.type))) {
+      toast.error('Use JPEG, PNG, GIF, or WebP images only');
+      e.target.value = '';
+      return;
+    }
+    if (files.some((file) => file.size > MAX_IMAGE_SIZE)) {
+      toast.error('Each image must be 5 MB or smaller');
+      e.target.value = '';
+      return;
+    }
+    if (files.length > 4) {
+      toast.error('Maximum 4 images allowed');
+      e.target.value = '';
+      return;
+    }
     setPreviewUrls(files.map((file) => URL.createObjectURL(file)));
     setFormData((prev) => ({ ...prev, images: files }));
   };
@@ -310,6 +327,7 @@ const Update = () => {
                     <img src={url} alt={`Preview ${index + 1}`} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <button type="button" onClick={() => removeImage(index)}
+                        aria-label={`Remove image ${index + 1}`}
                         className="p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600">
                         <X size={14} />
                       </button>
@@ -324,7 +342,7 @@ const Update = () => {
               <span className="text-sm font-medium text-[#687386] group-hover:text-[#142c4e] transition-colors">
                 Replace images
               </span>
-              <input id="images" name="images" type="file" multiple accept="image/*"
+              <input id="images" name="images" type="file" multiple accept=".jpg,.jpeg,.png,.gif,.webp"
                 onChange={handleImageChange} className="sr-only" />
             </label>
           </div>
