@@ -676,7 +676,7 @@ npm run dev   # Starts admin panel on http://localhost:5174
 4. **Add environment variables:**
    ```env
    VITE_API_BASE_URL=https://your-backend-domain.onrender.com
-   VITE_ENABLE_AI_HUB=false  # Disable for production (users provide own keys)
+   VITE_ENABLE_AI_HUB=true
    VITE_SITE_URL=https://your-domain.vercel.app
    VITE_CONTACT_EMAIL=contact@yourdomain.com
    ```

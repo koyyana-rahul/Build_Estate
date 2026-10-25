@@ -80,11 +80,11 @@ Create or edit `frontend/.env.local`:
 # Required — points to your backend API
 VITE_API_BASE_URL=http://localhost:4000
 
-# Optional — set to "true" to enable AI Property Hub locally
+# Optional — defaults to enabled. Set to "false" to disable the AI Property Hub.
 VITE_ENABLE_AI_HUB=true
 ```
 
-> **Note:** Do not set `VITE_ENABLE_AI_HUB` on Vercel. Leaving it unset disables the aggressive AI Hub fetching on the live site (saving API credits) and presents a localized "run locally" modal instead.
+> **Note:** The AI Property Hub is enabled by default. Set `VITE_ENABLE_AI_HUB=false` in Vercel only if you intentionally want to disable it.
 
 </details>
 
@@ -167,7 +167,7 @@ frontend/src/
 2. Import the repository into [Vercel](https://vercel.com).
 3. Set **Root Directory** to `frontend`.
 4. Inject environment variable: `VITE_API_BASE_URL` mapped to your Render backend URL.
-5. **Critically:** Do not set `VITE_ENABLE_AI_HUB` in Vercel to preserve limits.
+5. Set `VITE_ENABLE_AI_HUB=true` in Vercel when the production AI Hub should be available.
 6. Trigger Deploy.
 
 Currently live at: **https://buildestate.vercel.app**

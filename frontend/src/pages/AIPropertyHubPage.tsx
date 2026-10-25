@@ -6,8 +6,8 @@ import Footer from '../components/common/Footer';
 import StructuredData from '../components/common/StructuredData';
 import { useSEO } from '../hooks/useSEO';
 
-/* ── Only import AI components when enabled ──────────────── */
-const AI_HUB_ENABLED = import.meta.env.VITE_ENABLE_AI_HUB === 'true';
+/* ── Keep the AI Hub available in production unless explicitly disabled. ── */
+const AI_HUB_ENABLED = import.meta.env.VITE_ENABLE_AI_HUB !== 'false';
 
 const AIHeroSection = AI_HUB_ENABLED ? React.lazy(() => import('../components/ai-hub/AIHeroSection')) : null;
 const AISearchResults = AI_HUB_ENABLED ? React.lazy(() => import('../components/ai-hub/AISearchResults')) : null;
