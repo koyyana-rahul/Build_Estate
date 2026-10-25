@@ -311,7 +311,7 @@ const UsersManagement = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#f7f5f0] px-6 py-8">
+    <div className="min-h-screen bg-[#f7f5f0] px-4 py-4 sm:px-6 sm:py-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -335,13 +335,13 @@ const UsersManagement = () => {
         {/* Filter + Search bar */}
         <div className="bg-white rounded-2xl border border-[#e5e7eb] mb-5 overflow-hidden">
           {/* Status tabs */}
-          <div className="flex border-b border-[#f7f5f0]">
+          <div className="flex max-w-full overflow-x-auto border-b border-[#f7f5f0] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {filterTabs.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => { setStatusFilter(tab.key); setCurrentPage(1); }}
                 className={cn(
-                  "px-5 py-3.5 text-sm font-medium transition-all border-b-2 -mb-px",
+                  "shrink-0 px-5 py-3.5 text-sm font-medium transition-all border-b-2 -mb-px whitespace-nowrap",
                   statusFilter === tab.key
                     ? "border-[#142c4e] text-[#142c4e]"
                     : "border-transparent text-[#687386] hover:text-[#253247]"
@@ -361,7 +361,7 @@ const UsersManagement = () => {
           </div>
 
           {/* Search + sort */}
-          <div className="flex gap-3 px-5 py-3.5">
+          <div className="flex flex-col gap-3 px-4 py-3.5 sm:flex-row sm:px-5">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#687386]" />
               <input
@@ -375,7 +375,7 @@ const UsersManagement = () => {
             <select
               value={sortBy}
               onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
-              className="px-3 py-2 border border-[#e5e7eb] rounded-lg bg-white text-sm text-[#687386] focus:outline-none focus:border-[#142c4e] transition-all"
+              className="w-full px-3 py-2 border border-[#e5e7eb] rounded-lg bg-white text-sm text-[#687386] focus:outline-none focus:border-[#142c4e] transition-all sm:w-auto"
             >
               <option value="createdAt">Date Joined</option>
               <option value="lastActive">Last Active</option>
@@ -383,7 +383,7 @@ const UsersManagement = () => {
             </select>
             <button
               onClick={() => { setSortOrder(sortOrder === "asc" ? "desc" : "asc"); setCurrentPage(1); }}
-              className="px-3 py-2 border border-[#e5e7eb] rounded-lg bg-white text-sm text-[#687386] hover:bg-[#f7f5f0] transition-colors font-space-mono"
+              className="w-full px-3 py-2 border border-[#e5e7eb] rounded-lg bg-white text-sm text-[#687386] hover:bg-[#f7f5f0] transition-colors font-space-mono sm:w-auto"
               title={sortOrder === "asc" ? "Sort descending" : "Sort ascending"}
             >
               {sortOrder === "asc" ? "↑" : "↓"}

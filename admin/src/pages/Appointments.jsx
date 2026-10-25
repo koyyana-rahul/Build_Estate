@@ -134,11 +134,11 @@ const Appointments = () => {
           className="bg-white rounded-2xl p-4 border border-[#e5e7eb] shadow-card mb-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             {/* Status Tabs */}
-            <div className="flex items-center gap-1 bg-[#f7f5f0] rounded-xl p-1">
+            <div className="flex max-w-full items-center gap-1 overflow-x-auto bg-[#f7f5f0] rounded-xl p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {["all", "pending", "confirmed", "cancelled"].map((status) => (
                 <button key={status} onClick={() => setFilter(status)}
                   className={cn(
-                    "px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 capitalize",
+                    "shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 capitalize whitespace-nowrap",
                     filter === status
                       ? "bg-[#253247] text-[#f7f5f0] shadow-sm"
                       : "text-[#687386] hover:text-[#253247]"

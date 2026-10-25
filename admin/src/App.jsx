@@ -58,7 +58,7 @@ const AppLayout = () => {
       {/* Main Content */}
       <div
         className={cn(
-          "flex-1 flex flex-col min-h-screen transition-all duration-300",
+          "min-w-0 flex-1 flex flex-col min-h-screen transition-all duration-300",
           !isLoginPage && "lg:ml-64", // Default margin for expanded sidebar
           !isLoginPage && isSidebarCollapsed && "lg:ml-20" // Smaller margin for collapsed sidebar
         )}

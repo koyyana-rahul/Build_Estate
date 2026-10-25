@@ -87,14 +87,15 @@ const PropertyGridCard = ({ property, onRemove }) => (
           {property.availability === "rent" && <span className="text-xs text-[#687386] ml-1">/mo</span>}
         </div>
         <div className="flex items-center gap-1.5">
-          <Link to={`/update/${property._id}`}>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              className="p-2 bg-[#f7f5f0] border border-[#e5e7eb] text-[#687386] rounded-lg hover:border-[#142c4e] hover:text-[#142c4e] transition-all duration-200">
+          <Link to={`/update/${property._id}`} aria-label={`Edit ${property.title}`}>
+            <span
+              className="inline-flex p-2 bg-[#f7f5f0] border border-[#e5e7eb] text-[#687386] rounded-lg hover:border-[#142c4e] hover:text-[#142c4e] transition-all duration-200">
               <Edit3 className="w-4 h-4" />
-            </motion.button>
+            </span>
           </Link>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             onClick={() => onRemove(property._id, property.title)}
+            aria-label={`Remove ${property.title}`}
             className="p-2 bg-[#f7f5f0] border border-[#e5e7eb] text-[#687386] rounded-lg hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-all duration-200">
             <Trash2 className="w-4 h-4" />
           </motion.button>
@@ -156,12 +157,14 @@ const PropertyListRow = ({ property, onRemove }) => (
 
     {/* Actions */}
     <div className="flex items-center gap-1.5 ml-auto flex-shrink-0">
-      <Link to={`/update/${property._id}`}>
-        <button className="p-2 text-[#687386] hover:text-[#142c4e] hover:bg-[#142c4e]/10 rounded-lg transition-all duration-200">
+      <Link to={`/update/${property._id}`} aria-label={`Edit ${property.title}`}>
+        <span
+          className="inline-flex p-2 text-[#687386] hover:text-[#142c4e] hover:bg-[#142c4e]/10 rounded-lg transition-all duration-200">
           <Edit3 className="w-4 h-4" />
-        </button>
+        </span>
       </Link>
       <button onClick={() => onRemove(property._id, property.title)}
+        aria-label={`Remove ${property.title}`}
         className="p-2 text-[#687386] hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200">
         <Trash2 className="w-4 h-4" />
       </button>
@@ -276,9 +279,9 @@ const PropertyListings = () => {
               <RefreshCw className={cn("w-4 h-4", refreshing && "animate-spin")} />
               <span className="hidden sm:inline">Refresh</span>
             </motion.button>
-            <Link to="/add">
+            <Link to="/add" className="flex-1 sm:flex-none">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-[#142c4e] hover:bg-[#0f2340] text-white rounded-xl text-sm font-semibold transition-all shadow-lg hover:shadow-terracotta">
+                className="flex w-full items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-[#142c4e] hover:bg-[#0f2340] text-white rounded-xl text-sm font-semibold transition-all shadow-lg hover:shadow-terracotta">
                 <Plus className="w-4 h-4" />
                 Add Property
               </motion.button>
