@@ -139,3 +139,20 @@ textarea {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+
+select {
+  min-width: 0;
+  max-width: 100%;
+  color: #253247;
+  background-color: #ffffff;
+}
+
+select:focus-visible {
+  outline: 3px solid rgba(198, 165, 107, 0.35);
+  outline-offset: 1px;
+}
+
+select option {
+  color: #253247;
+  background: #ffffff;
+}

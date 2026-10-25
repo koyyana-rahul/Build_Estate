@@ -1,25 +1,6 @@
 import { Bell, ChevronRight, Menu } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
-
-const pageLabels = {
-  '/dashboard': 'Dashboard',
-  '/pending-listings': 'Review Queue',
-  '/list': 'All Properties',
-  '/add': 'Add Property',
-  '/appointments': 'Appointments',
-  '/users': 'Users',
-  '/activity-logs': 'Activity Logs',
-  '/ai-models': 'AI Models',
-};
 
 const AdminHeader = ({ onMenuClick }) => {
-  const location = useLocation();
-  const pageTitle = location.pathname.startsWith('/update/')
-    ? 'Edit Property'
-    : location.pathname.startsWith('/users/')
-      ? 'User Details'
-      : pageLabels[location.pathname] || 'Admin workspace';
-
   return (
     <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-4 border-b border-[#e5e7eb] bg-[#f7f5f0]/95 px-4 backdrop-blur sm:px-6 lg:px-8">
       <div className="flex min-w-0 items-center gap-3">
@@ -31,13 +12,10 @@ const AdminHeader = ({ onMenuClick }) => {
         >
           <Menu className="h-5 w-5" />
         </button>
-        <div className="min-w-0">
-          <div className="hidden items-center gap-1 text-xs font-medium text-[#687386] sm:flex">
-            <span>Aavasa</span>
-            <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>Admin</span>
-          </div>
-          <h1 className="truncate text-lg font-bold text-[#253247] sm:text-xl">{pageTitle}</h1>
+        <div className="flex min-w-0 items-center gap-1 text-sm font-semibold text-[#253247]">
+          <span>Aavasa</span>
+          <ChevronRight className="h-4 w-4 text-[#687386]" aria-hidden="true" />
+          <span className="text-[#687386]">Admin</span>
         </div>
       </div>
 

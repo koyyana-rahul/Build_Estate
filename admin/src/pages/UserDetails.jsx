@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import {
   ArrowLeft, Users, Home, Calendar, Activity, Mail, Phone,
   MapPin, Clock, Shield, Ban, UserCheck, Trash2, Eye,
-  AlertCircle, RefreshCw, ExternalLink, CheckCircle2
+  AlertCircle, ExternalLink, CheckCircle2
 } from "lucide-react";
 import { toast } from "sonner";
 import apiClient from "../services/apiClient";
 import { cn, formatDate } from "../lib/utils";
+import useAutoRefresh from "../hooks/useAutoRefresh";
 
 // Components
 import UserStatusBadge from "../components/UserStatusBadge";
@@ -60,6 +61,7 @@ const UserDetailsPage = () => {
       fetchUserDetails();
     }
   }, [id]);
+  useAutoRefresh(fetchUserDetails, 90000);
 
   // User Actions
   const handleSuspendUser = async (suspendData) => {
@@ -253,14 +255,6 @@ const UserDetailsPage = () => {
                   Reactivate
                 </button>
               )}
-              <button
-                onClick={fetchUserDetails}
-                disabled={actionLoading}
-                className="flex items-center gap-2 px-4 py-2.5 border border-[#e5e7eb] text-[#687386] rounded-xl font-medium text-sm hover:bg-[#f7f5f0] transition-colors disabled:opacity-50"
-              >
-                <RefreshCw className={cn("w-4 h-4", actionLoading && "animate-spin")} />
-                Refresh
-              </button>
             </div>
           </div>
 

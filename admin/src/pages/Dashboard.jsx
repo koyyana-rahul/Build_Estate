@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  RefreshCw, AlertTriangle, ArrowRight, AlertCircle,
+  AlertTriangle, ArrowRight, AlertCircle,
   Building2, Users, Calendar, DollarSign, Activity,
   CheckCircle2, XCircle, Clock, TrendingUp,
 } from "lucide-react";
@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import apiClient from "../services/apiClient";
 import { cn } from "../lib/utils";
+import useAutoRefresh from "../hooks/useAutoRefresh";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 const timeAgo = (dateStr) => {
@@ -236,6 +237,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => { fetchStats(); }, []);
+  useAutoRefresh(() => fetchStats(true), 60000);
 
   // Transform data for Recharts
   const viewsData = (stats?.viewsData?.labels || []).map((d, i) => ({
@@ -346,14 +348,6 @@ const Dashboard = () => {
             <h1 className="text-2xl font-bold text-[#253247] tracking-tight">Overview</h1>
             <p className="text-sm text-[#687386] mt-0.5">{today}</p>
           </div>
-          <button
-            onClick={() => fetchStats(true)}
-            disabled={refreshing || inFlight}
-            className="self-start flex items-center gap-2 px-4 py-2 bg-white border border-[#e5e7eb] text-[#687386] rounded-lg text-sm font-medium hover:border-[#142c4e] hover:text-[#142c4e] active:scale-[0.97] transition-all duration-150 disabled:opacity-50 shadow-sm"
-          >
-            <RefreshCw className={cn("w-3.5 h-3.5", (refreshing || inFlight) && "animate-spin")} />
-            {refreshing || inFlight ? "Refreshing…" : "Refresh"}
-          </button>
         </motion.div>
 
         {/* ── Action Banner ── */}

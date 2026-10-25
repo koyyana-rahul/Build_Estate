@@ -133,6 +133,11 @@ button, a, input, select, textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
+select {
+  min-width: 0;
+  max-width: 100%;
+}
+
 @media (max-width: 639px) {
   body {
     overflow-x: hidden;

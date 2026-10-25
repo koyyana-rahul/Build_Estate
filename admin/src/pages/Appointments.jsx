@@ -8,6 +8,7 @@ import {
 import { toast } from "sonner";
 import apiClient from "../services/apiClient";
 import { cn, formatDate } from "../lib/utils";
+import useAutoRefresh from "../hooks/useAutoRefresh";
 
 const STATUS_CONFIG = {
   pending: { label: "Pending", className: "bg-amber-50 text-amber-700 border border-amber-200" },
@@ -88,6 +89,7 @@ const Appointments = () => {
   };
 
   useEffect(() => { fetchAppointments(); }, []);
+  useAutoRefresh(fetchAppointments, 45000);
 
   const filteredAppointments = appointments.filter((apt) => {
     const clientName = apt.userId?.name || apt.guestInfo?.name || "";

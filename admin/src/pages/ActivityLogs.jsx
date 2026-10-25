@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 import ActivityLogDetailModal from '../components/ActivityLogDetailModal';
 import apiClient from '../services/apiClient';
+import useAutoRefresh from '../hooks/useAutoRefresh';
 
 const ActivityLogs = () => {
   const [logs, setLogs] = useState([]);
@@ -188,6 +189,7 @@ const ActivityLogs = () => {
   useEffect(() => {
     fetchLogs();
   }, [filters]);
+  useAutoRefresh(fetchLogs, 60000);
 
   // Report error to parent/toast system
   useEffect(() => {
@@ -254,7 +256,7 @@ const ActivityLogs = () => {
                 <select
                   value={filters.action}
                   onChange={(e) => handleFilterChange('action', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2
+                  className="w-full min-w-0 max-w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2
                            focus:ring-[#142c4e] focus:border-transparent"
                 >
                   {actionOptions.map(option => (
@@ -273,7 +275,7 @@ const ActivityLogs = () => {
                 <select
                   value={filters.targetType}
                   onChange={(e) => handleFilterChange('targetType', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2
+                  className="w-full min-w-0 max-w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2
                            focus:ring-[#142c4e] focus:border-transparent"
                 >
                   {targetTypeOptions.map(option => (

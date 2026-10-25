@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import {
   Users, Search, Filter, ChevronDown, MoreVertical,
   Calendar, Mail, Shield, Clock, Trash2, Eye,
-  AlertCircle, RefreshCw, UserCheck, Ban
+  AlertCircle, UserCheck, Ban
 } from "lucide-react";
 import { toast } from "sonner";
 import apiClient from "../services/apiClient";
 import { cn, formatDate } from "../lib/utils";
+import useAutoRefresh from "../hooks/useAutoRefresh";
 
 // Components
 import UserStatusBadge from "../components/UserStatusBadge";
@@ -90,6 +91,7 @@ const UsersManagement = () => {
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+  useAutoRefresh(() => fetchUsers(true), 90000);
 
   // User Actions
   const handleSuspendUser = async (suspendData) => {
@@ -322,14 +324,6 @@ const UsersManagement = () => {
               {pagination.totalUsers ?? users.length} registered accounts
             </p>
           </div>
-          <button
-            onClick={() => fetchUsers(true)}
-            disabled={refreshing}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-[#e5e7eb] text-[#687386] rounded-lg text-sm font-medium hover:border-[#142c4e] hover:text-[#142c4e] active:scale-[0.97] transition-all shadow-sm disabled:opacity-50"
-          >
-            <RefreshCw className={cn("w-3.5 h-3.5", refreshing && "animate-spin")} />
-            {refreshing ? "Refreshing…" : "Refresh"}
-          </button>
         </div>
 
         {/* Filter + Search bar */}
@@ -375,7 +369,7 @@ const UsersManagement = () => {
             <select
               value={sortBy}
               onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
-              className="w-full px-3 py-2 border border-[#e5e7eb] rounded-lg bg-white text-sm text-[#687386] focus:outline-none focus:border-[#142c4e] transition-all sm:w-auto"
+              className="w-full min-w-0 max-w-full px-3 py-2 border border-[#e5e7eb] rounded-lg bg-white text-sm text-[#687386] focus:outline-none focus:border-[#142c4e] transition-all sm:w-auto"
             >
               <option value="createdAt">Date Joined</option>
               <option value="lastActive">Last Active</option>

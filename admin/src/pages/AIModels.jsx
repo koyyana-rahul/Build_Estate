@@ -2,11 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Cpu, Plus, Pencil, Trash2, Star, ToggleLeft, ToggleRight,
-  RefreshCw, AlertCircle, Check, X, ChevronDown, ChevronUp,
+  AlertCircle, Check, X, ChevronDown, ChevronUp,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import apiClient from '../services/apiClient';
 import { cn } from '../lib/utils';
+import useAutoRefresh from '../hooks/useAutoRefresh';
 
 const EMPTY_FORM = {
   name: '',
@@ -52,6 +53,7 @@ const AIModels = () => {
   }, []);
 
   useEffect(() => { fetchModels(); }, [fetchModels]);
+  useAutoRefresh(fetchModels, 120000);
 
   function openCreate() {
     setForm({ ...EMPTY_FORM, config: { ...EMPTY_FORM.config } });
@@ -152,26 +154,20 @@ const AIModels = () => {
     <div className="min-h-screen bg-[#f7f5f0] p-4 sm:p-6">
       {/* Header */}
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-4 mb-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-center gap-3">
             <div className="h-10 w-10 bg-[#c6a56b] rounded-xl flex items-center justify-center">
               <Cpu className="h-5 w-5 text-[#142c4e]" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-[#253247]">AI Models</h1>
-              <p className="text-sm text-[#687386]">Manage NVIDIA NIM models available to users</p>
+              <p className="text-sm text-[#687386]">Manage models available to users</p>
             </div>
           </div>
-          <div className="flex gap-2">
-            <button
-              onClick={fetchModels}
-              className="p-2 text-[#687386] hover:text-[#253247] hover:bg-white rounded-lg transition-colors"
-            >
-              <RefreshCw className={cn('h-4 w-4', loading && 'animate-spin')} />
-            </button>
+          <div className="flex w-full gap-2 sm:w-auto">
             <button
               onClick={openCreate}
-              className="flex items-center gap-2 bg-[#142c4e] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0f2340] transition-colors"
+              className="flex flex-1 items-center justify-center gap-2 bg-[#142c4e] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0f2340] transition-colors sm:flex-none"
             >
               <Plus className="h-4 w-4" />
               Add Model
@@ -198,7 +194,7 @@ const AIModels = () => {
           <div className="space-y-3">
             {models.map(model => (
               <div key={model._id} className="bg-white rounded-xl border border-[#e5e7eb] overflow-hidden">
-                <div className="flex items-center gap-4 p-4">
+                <div className="flex items-start gap-3 p-4 sm:items-center sm:gap-4">
                   {/* Status indicator */}
                   <div className={cn(
                     'h-2.5 w-2.5 rounded-full flex-shrink-0',
@@ -227,9 +223,10 @@ const AIModels = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-1 flex-shrink-0">
+                  <div className="flex flex-wrap items-center justify-end gap-1 flex-shrink-0">
                     <button
                       onClick={() => setExpandedConfig(expandedConfig === model._id ? null : model._id)}
+                      aria-label={`${expandedConfig === model._id ? 'Hide' : 'Show'} ${model.name} configuration`}
                       className="p-2 text-[#687386] hover:text-[#253247] hover:bg-[#f7f5f0] rounded-lg transition-colors"
                       title="Toggle config"
                     >
@@ -238,6 +235,7 @@ const AIModels = () => {
                     {!model.isDefault && (
                       <button
                         onClick={() => setDefault(model)}
+                        aria-label={`Set ${model.name} as default`}
                         className="p-2 text-[#687386] hover:text-[#142c4e] hover:bg-[#142c4e]/10 rounded-lg transition-colors"
                         title="Set as default"
                       >
@@ -246,6 +244,7 @@ const AIModels = () => {
                     )}
                     <button
                       onClick={() => toggleActive(model)}
+                      aria-label={`${model.isActive ? 'Deactivate' : 'Activate'} ${model.name}`}
                       className={cn(
                         'p-2 rounded-lg transition-colors',
                         model.isActive
@@ -258,6 +257,7 @@ const AIModels = () => {
                     </button>
                     <button
                       onClick={() => openEdit(model)}
+                      aria-label={`Edit ${model.name}`}
                       className="p-2 text-[#687386] hover:text-[#253247] hover:bg-[#f7f5f0] rounded-lg transition-colors"
                       title="Edit"
                     >
@@ -265,6 +265,7 @@ const AIModels = () => {
                     </button>
                     <button
                       onClick={() => setDeleteConfirm(model._id)}
+                      aria-label={`Delete ${model.name}`}
                       className="p-2 text-[#687386] hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                       title="Delete"
                     >
@@ -282,7 +283,7 @@ const AIModels = () => {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="border-t border-[#e5e7eb] px-4 py-3 bg-[#f7f5f0] grid grid-cols-3 gap-3 text-xs">
+                      <div className="border-t border-[#e5e7eb] px-4 py-3 bg-[#f7f5f0] grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
                         {[
                           ['maxTokens', model.config?.maxTokens],
                           ['timeoutMs', model.config?.timeoutMs],
@@ -310,9 +311,9 @@ const AIModels = () => {
                       exit={{ opacity: 0, height: 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="border-t border-red-100 bg-red-50 px-4 py-3 flex items-center justify-between">
+                      <div className="border-t border-red-100 bg-red-50 px-4 py-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <span className="text-sm text-red-700">Delete <strong>{model.name}</strong>? This cannot be undone.</span>
-                        <div className="flex gap-2">
+                        <div className="flex justify-end gap-2">
                           <button
                             onClick={() => setDeleteConfirm(null)}
                             className="flex items-center gap-1 text-sm text-[#687386] hover:text-[#253247] px-3 py-1.5 rounded-lg hover:bg-white transition-colors"

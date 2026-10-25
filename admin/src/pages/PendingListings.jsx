@@ -2,12 +2,13 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Check, X, Building2, MapPin, BedDouble, Bath,
-  Maximize, User, Mail, Clock, RefreshCw, Search,
+  Maximize, User, Mail, Clock, Search,
   ChevronLeft, ChevronRight, Images,
 } from "lucide-react";
 import { toast } from "sonner";
 import apiClient from "../services/apiClient";
 import { cn, formatPrice, formatDate } from "../lib/utils";
+import useAutoRefresh from "../hooks/useAutoRefresh";
 
 // ─── Image Gallery + Lightbox ─────────────────────────────────────────────────
 const ImageGallery = ({ images, title }) => {
@@ -409,6 +410,7 @@ const PendingListings = () => {
   }, []);
 
   useEffect(() => { fetchPending(); }, [fetchPending]);
+  useAutoRefresh(fetchPending, 60000);
 
   const handleApprove = async (id) => {
     setActionLoading(`approve-${id}`);
@@ -487,13 +489,6 @@ const PendingListings = () => {
             </div>
             <p className="text-sm text-[#687386]">Approve or reject user-submitted property listings.</p>
           </div>
-          <button
-            onClick={fetchPending}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#687386] bg-white border border-[#e5e7eb] rounded-lg hover:border-[#142c4e] hover:text-[#142c4e] active:scale-[0.97] transition-all shadow-sm"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Refresh
-          </button>
         </div>
 
         {/* Search */}

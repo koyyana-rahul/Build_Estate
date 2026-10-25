@@ -30,17 +30,17 @@ import AIModels from "./pages/AIModels";
 // Page transition variants
 const pageVariants = {
   initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
   exit: { opacity: 0, y: -8, transition: { duration: 0.2 } },
 };
 
 // App Layout component
 const AppLayout = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
+  const isLoginPage = location.pathname === "/login";
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
-    return localStorage.getItem('sidebarCollapsed') === 'true';
+    return localStorage.getItem("sidebarCollapsed") === "true";
   });
 
   return (
@@ -60,10 +60,12 @@ const AppLayout = () => {
         className={cn(
           "min-w-0 flex-1 flex flex-col min-h-screen transition-all duration-300",
           !isLoginPage && "lg:ml-64", // Default margin for expanded sidebar
-          !isLoginPage && isSidebarCollapsed && "lg:ml-20" // Smaller margin for collapsed sidebar
+          !isLoginPage && isSidebarCollapsed && "lg:ml-20", // Smaller margin for collapsed sidebar
         )}
       >
-        {!isLoginPage && <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} />}
+        {!isLoginPage && (
+          <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} />
+        )}
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -71,9 +73,7 @@ const AppLayout = () => {
             initial="initial"
             animate="animate"
             exit="exit"
-            className={cn(
-              "flex-1",
-            )}
+            className={cn("flex-1")}
           >
             <Routes location={location}>
               {/* Public Routes */}
@@ -120,10 +120,10 @@ const App = () => {
           closeButton
           toastOptions={{
             style: {
-              fontFamily: 'Manrope, sans-serif',
-              fontSize: '14px',
-              border: '1px solid #e5e7eb',
-              color: '#253247',
+              fontFamily: "Manrope, sans-serif",
+              fontSize: "14px",
+              border: "1px solid #e5e7eb",
+              color: "#253247",
             },
           }}
         />

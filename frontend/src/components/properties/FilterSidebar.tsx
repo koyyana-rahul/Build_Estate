@@ -88,7 +88,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="w-[359px] bg-white border-r border-[#e5e7eb] h-screen sticky top-20 overflow-y-auto pb-24">
+    <div className="w-full max-w-full lg:w-[359px] bg-white border-r border-[#e5e7eb] min-h-[calc(100dvh-5rem)] sticky top-20 overflow-y-auto pb-24">
       <div className="p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

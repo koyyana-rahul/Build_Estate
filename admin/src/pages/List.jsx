@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import {
   Trash2, Edit3, Search, Plus, Home, BedDouble, Bath,
-  Maximize, MapPin, Grid3X3, List as ListIcon, RefreshCw,
-  Building2,
+  Maximize, MapPin, Grid3X3, List as ListIcon,
+  Building2, SlidersHorizontal, ChevronDown, ChevronUp, X,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import apiClient from "../services/apiClient";
 import { cn, formatPrice } from "../lib/utils";
+import useAutoRefresh from "../hooks/useAutoRefresh";
 
 const PROPERTY_TYPES = ["all", "House", "Apartment", "Office", "Villa"];
 const SORT_OPTIONS = [
@@ -180,7 +181,7 @@ const PropertyListings = () => {
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
   const [viewMode, setViewMode] = useState("grid");
-  const [refreshing, setRefreshing] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const fetchProperties = async () => {
     try {
@@ -203,13 +204,6 @@ const PropertyListings = () => {
     }
   };
 
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    await fetchProperties();
-    setRefreshing(false);
-    toast.success("Properties refreshed!");
-  };
-
   const handleRemoveProperty = async (propertyId, propertyTitle) => {
     if (!window.confirm(`Remove "${propertyTitle}"? This cannot be undone.`)) return;
     try {
@@ -227,6 +221,7 @@ const PropertyListings = () => {
   };
 
   useEffect(() => { fetchProperties(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useAutoRefresh(fetchProperties, 60000);
 
   const filteredProperties = properties
     .filter((p) => {
@@ -242,6 +237,7 @@ const PropertyListings = () => {
     });
 
   const hasActiveFilters = Boolean(searchTerm || filterType !== "all");
+  const activeFilterCount = Number(Boolean(searchTerm)) + Number(filterType !== "all");
   const clearFilters = () => {
     setSearchTerm("");
     setFilterType("all");
@@ -273,12 +269,6 @@ const PropertyListings = () => {
             </p>
           </div>
           <div className="flex w-full sm:w-auto items-center gap-2">
-            <motion.button onClick={handleRefresh} disabled={refreshing}
-              whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-              className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 py-2.5 bg-white border border-[#e5e7eb] text-[#253247] rounded-xl text-sm font-medium hover:border-[#142c4e] hover:text-[#142c4e] transition-all shadow-card disabled:opacity-60">
-              <RefreshCw className={cn("w-4 h-4", refreshing && "animate-spin")} />
-              <span className="hidden sm:inline">Refresh</span>
-            </motion.button>
             <Link to="/add" className="flex-1 sm:flex-none">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 className="flex w-full items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-[#142c4e] hover:bg-[#0f2340] text-white rounded-xl text-sm font-semibold transition-all shadow-lg hover:shadow-terracotta">
@@ -293,35 +283,38 @@ const PropertyListings = () => {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="bg-white rounded-2xl p-3 sm:p-4 border border-[#e5e7eb] shadow-card mb-6">
           <div className="flex flex-col gap-3">
-            {/* Search */}
-            <div className="relative flex-1 w-full">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+              {/* Search */}
+              <div className="relative min-w-0 flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#687386]" />
               <input type="text" placeholder="Search properties..."
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-9 pr-4 py-2.5 bg-[#f7f5f0] border border-[#e5e7eb] rounded-xl text-sm text-[#253247] placeholder-[#687386] outline-none focus:border-[#142c4e] focus:ring-2 focus:ring-[#142c4e]/15 transition-all" />
-            </div>
+              </div>
 
-            {/* Type Filter */}
-            <div className="flex w-full items-center gap-1 overflow-x-auto bg-[#f7f5f0] rounded-xl p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {PROPERTY_TYPES.map((type) => (
-                <button key={type} onClick={() => setFilterType(type)}
-                  type="button"
-                  className={cn(
-                    "shrink-0 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 capitalize whitespace-nowrap",
-                    filterType === type
-                      ? "bg-[#253247] text-[#f7f5f0] shadow-sm"
-                      : "text-[#687386] hover:text-[#253247]"
-                  )}>
-                  {type === "all" ? "All Types" : type}
-                </button>
-              ))}
-            </div>
+              <button type="button" onClick={() => setFiltersOpen((open) => !open)}
+                aria-expanded={filtersOpen} aria-controls="property-filters"
+                className={cn(
+                  "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-colors",
+                  filtersOpen || hasActiveFilters
+                    ? "border-[#142c4e] bg-[#eef3f8] text-[#142c4e]"
+                    : "border-[#e5e7eb] bg-white text-[#253247] hover:border-[#142c4e]"
+                )}>
+                <SlidersHorizontal className="h-4 w-4" />
+                Filters
+                {activeFilterCount > 0 && (
+                  <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#142c4e] px-1.5 text-[11px] text-white">
+                    {activeFilterCount}
+                  </span>
+                )}
+                {filtersOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </button>
 
-            {/* Sort + View Toggle */}
-            <div className="flex w-full items-center gap-2">
+              {/* Sort + View Toggle */}
+              <div className="flex w-full items-center gap-2 lg:w-auto">
               <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}
                 aria-label="Sort properties"
-                className="min-w-0 flex-1 px-3 py-2.5 bg-[#f7f5f0] border border-[#e5e7eb] rounded-xl text-xs text-[#687386] outline-none focus:border-[#142c4e] transition-all cursor-pointer">
+                className="min-w-0 flex-1 max-w-full px-3 py-2.5 bg-[#f7f5f0] border border-[#e5e7eb] rounded-xl text-xs text-[#687386] outline-none focus:border-[#142c4e] transition-all cursor-pointer lg:w-44 lg:flex-none">
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
                 ))}
@@ -337,13 +330,33 @@ const PropertyListings = () => {
                   <ListIcon className="w-4 h-4" />
                 </button>
               </div>
-              {hasActiveFilters && (
-                <button type="button" onClick={clearFilters}
-                  className="shrink-0 px-3 py-2.5 text-xs font-semibold text-[#142c4e] hover:bg-[#eef3f8] rounded-xl transition-colors">
-                  Clear
-                </button>
-              )}
+              </div>
             </div>
+
+            {filtersOpen && (
+              <motion.div id="property-filters" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }} className="border-t border-[#eef0f2] pt-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto bg-[#f7f5f0] rounded-xl p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                    {PROPERTY_TYPES.map((type) => (
+                      <button key={type} onClick={() => setFilterType(type)} type="button"
+                        className={cn(
+                          "shrink-0 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 capitalize whitespace-nowrap",
+                          filterType === type ? "bg-[#253247] text-[#f7f5f0] shadow-sm" : "text-[#687386] hover:text-[#253247]"
+                        )}>
+                        {type === "all" ? "All Types" : type}
+                      </button>
+                    ))}
+                  </div>
+                  {hasActiveFilters && (
+                    <button type="button" onClick={clearFilters}
+                      className="inline-flex shrink-0 items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-[#142c4e] hover:bg-[#eef3f8] rounded-xl transition-colors">
+                      <X className="h-3.5 w-3.5" /> Clear filters
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            )}
           </div>
         </motion.div>
 
