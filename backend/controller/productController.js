@@ -1,6 +1,8 @@
 import fs from "fs";
+import mongoose from "mongoose";
 import cloudinary from "../config/cloudinary.js";
 import Property from "../models/propertyModel.js";
+import logger from "../utils/logger.js";
 
 const addproperty = async (req, res) => {
     try {
@@ -57,6 +59,17 @@ const addproperty = async (req, res) => {
 
 const listproperty = async (req, res) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            logger.warn("Property list unavailable because MongoDB is not connected", {
+                requestId: req.requestId,
+                readyState: mongoose.connection.readyState,
+            });
+            return res.status(503).json({
+                message: "Property service temporarily unavailable",
+                success: false,
+            });
+        }
+
         // Pagination parameters
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 20; // Default 20 per page
@@ -92,7 +105,11 @@ const listproperty = async (req, res) => {
             }
         });
     } catch (error) {
-        console.log("Error listing products: ", error);
+        logger.error("Error listing products", {
+            error: error.message,
+            stack: error.stack,
+            requestId: req.requestId,
+        });
         res.status(500).json({ message: "Server Error", success: false });
     }
 };
