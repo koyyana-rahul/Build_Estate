@@ -202,7 +202,7 @@ const SettingsTab: React.FC = () => {
 type Tab = 'overview' | 'settings';
 
 const DashboardPage: React.FC = () => {
-  useSEO({ title: 'My Dashboard', description: 'Manage your BuildEstate account, appointments, and saved activity.', noindex: true });
+  useSEO({ title: 'My Dashboard', description: 'Manage your Aavasa account, appointments, and saved activity.', noindex: true });
   const navigate = useNavigate();
   const { user, isAuthenticated, isLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<Tab>('overview');

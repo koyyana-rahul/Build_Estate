@@ -8,13 +8,13 @@ const SimpleFooter: React.FC = () => {
         <div className="flex items-center gap-3 mb-3">
           <div className="w-2 h-2 bg-[#142c4e] rounded-full" />
           <span className="font-manrope font-extralight text-sm text-[#253247] uppercase tracking-widest">
-            BuildEstate
+            Aavasa
           </span>
         </div>
 
         {/* Copyright */}
         <p className="font-manrope font-extralight text-xs text-[#687386]">
-          © 2023 BuildEstate. All rights reserved.
+          © 2023 Aavasa. All rights reserved.
         </p>
       </div>
     </footer>

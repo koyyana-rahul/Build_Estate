@@ -75,7 +75,7 @@ const Login = () => {
               <Home className="h-5 w-5 text-white" />
             </div>
             <div>
-              <div className="text-xl font-bold text-[#f7f5f0]">BuildEstate</div>
+              <div className="text-xl font-bold text-[#f7f5f0]">Aavasa</div>
               <div className="text-xs text-[#687386] uppercase tracking-widest">Admin Panel</div>
             </div>
           </div>
@@ -106,7 +106,7 @@ const Login = () => {
         {/* Footer */}
         <div className="relative z-10 flex items-center gap-2 text-xs text-[#687386]">
           <Shield className="w-3.5 h-3.5" />
-          <span>Secured with 256-bit encryption • BuildEstate © 2025</span>
+          <span>Secured with 256-bit encryption • Aavasa © 2025</span>
         </div>
       </motion.div>
 
@@ -123,7 +123,7 @@ const Login = () => {
             <div className="w-9 h-9 bg-[#142c4e] rounded-xl flex items-center justify-center">
             <Home className="h-5 w-5 text-[#c6a56b]" />
             </div>
-            <div className="text-lg font-bold text-[#253247]">BuildEstate Admin</div>
+            <div className="text-lg font-bold text-[#253247]">Aavasa Admin</div>
           </div>
 
           {/* Header */}

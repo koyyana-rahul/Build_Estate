@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
                 <Home className="w-5 h-5" />
               </div>
               <span className="font-serif text-xl font-bold tracking-tight text-foreground">
-                BuildEstate
+                Aavasa
               </span>
             </Link>
             <p className="font-sans text-sm leading-relaxed text-muted-foreground mb-6">
@@ -140,7 +140,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              © 2026 BuildEstate. All rights reserved.
+              © 2026 Aavasa. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               {[

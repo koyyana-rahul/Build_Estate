@@ -1,4 +1,4 @@
-# Environment Variables — BuildEstate Real Estate Platform
+# Environment Variables — Aavasa Real Estate Platform
 
 ## Overview
 

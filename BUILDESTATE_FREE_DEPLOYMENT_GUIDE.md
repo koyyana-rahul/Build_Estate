@@ -1,4 +1,4 @@
-# BuildEstate free deployment guide
+# Aavasa free deployment guide
 
 This guide deploys the existing monorepo without a custom domain:
 

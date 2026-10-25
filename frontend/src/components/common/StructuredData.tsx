@@ -44,7 +44,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
-      name: 'BuildEstate',
+      name: 'Aavasa',
       url: SITE_URL,
       description: 'AI-powered luxury real estate platform for finding your perfect property in India.',
       potentialAction: {
@@ -58,7 +58,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,
-      name: 'BuildEstate',
+      name: 'Aavasa',
       url: SITE_URL,
       logo: `${SITE_URL}/logo.png`,
       areaServed: AREA_SERVED,
@@ -77,7 +77,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
       '@id': `${SITE_URL}/#localbusiness`,
-      name: 'BuildEstate',
+      name: 'Aavasa',
       description: 'AI-powered real estate platform for finding luxury properties in India.',
       url: SITE_URL,
       logo: `${SITE_URL}/logo.png`,
@@ -129,7 +129,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
     aiHub: {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
-      name: 'AI Property Hub - BuildEstate',
+      name: 'AI Property Hub - Aavasa',
       applicationCategory: 'RealEstateApplication',
       description: 'AI-powered real estate analytics, property search, and investment insights.',
       url: `${SITE_URL}/ai-hub`,
@@ -175,7 +175,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
     howTo: {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
-      name: data?.howToName || 'How to Buy Property with BuildEstate',
+      name: data?.howToName || 'How to Buy Property with Aavasa',
       description: data?.howToDescription || 'AI-assisted steps to find and buy your perfect home in India.',
       step: (data?.steps || []).map((step) => ({
         '@type': 'HowToStep',

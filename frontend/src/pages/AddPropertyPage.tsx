@@ -39,7 +39,7 @@ interface FormState {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const AddPropertyPage: React.FC = () => {
-  useSEO({ title: 'Add a Property', description: 'Submit a property listing to BuildEstate for review.', noindex: true });
+  useSEO({ title: 'Add a Property', description: 'Submit a property listing to Aavasa for review.', noindex: true });
   const navigate = useNavigate();
   const { isAuthenticated, isLoading, token } = useAuth();
 

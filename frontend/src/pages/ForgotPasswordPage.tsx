@@ -7,7 +7,7 @@ import { userAPI } from '../services/api';
 import { useSEO } from '../hooks/useSEO';
 
 const ForgotPasswordPage: React.FC = () => {
-  useSEO({ title: 'Forgot Password', description: 'Request a secure BuildEstate password reset link.', noindex: true });
+  useSEO({ title: 'Forgot Password', description: 'Request a secure Aavasa password reset link.', noindex: true });
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);

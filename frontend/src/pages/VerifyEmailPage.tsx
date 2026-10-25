@@ -9,7 +9,7 @@ import { useSEO } from '../hooks/useSEO';
 type VerificationStatus = 'loading' | 'success' | 'error';
 
 const VerifyEmailPage: React.FC = () => {
-  useSEO({ title: 'Verify Email', description: 'Verify your BuildEstate email address.', noindex: true });
+  useSEO({ title: 'Verify Email', description: 'Verify your Aavasa email address.', noindex: true });
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
   const { updateUser } = useAuth();

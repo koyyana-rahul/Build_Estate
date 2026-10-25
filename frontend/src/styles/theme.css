@@ -1,6 +1,6 @@
 @custom-variant dark (&:is(.dark *));
 
-/* BuildEstate Luxury Design System */
+/* Aavasa Luxury Design System */
 :root {
   /* Luxury Color Palette */
   --canvas-cream: #f7f5f0;
@@ -173,7 +173,7 @@
   }
 
   /**
-  * BuildEstate Typography System
+  * Aavasa Typography System
   * Headings use Fraunces (elegant serif)
   * Subheadings use Syne (geometric sans)
   * Body text uses Red Hat Display (humanist sans)

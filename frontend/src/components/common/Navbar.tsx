@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
               <Home className="w-5 h-5" />
             </div>
             <span className="font-serif text-xl font-bold tracking-tight text-foreground">
-              BuildEstate
+              Aavasa
             </span>
           </Link>
 

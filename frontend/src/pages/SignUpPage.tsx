@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useSEO } from '../hooks/useSEO';
 
 const SignUpPage: React.FC = () => {
-  useSEO({ title: 'Create an Account', description: 'Create a BuildEstate account to save properties and manage viewing requests.', noindex: true });
+  useSEO({ title: 'Create an Account', description: 'Create a Aavasa account to save properties and manage viewing requests.', noindex: true });
   const navigate = useNavigate();
   const { register } = useAuth();
   const [error, setError] = useState<string | null>(null);
@@ -82,7 +82,7 @@ const SignUpPage: React.FC = () => {
               Create Account
             </h1>
             <p className="font-manrope font-extralight text-sm text-[#253247]">
-              Join BuildEstate and find your dream home
+              Join Aavasa and find your dream home
             </p>
           </div>
 

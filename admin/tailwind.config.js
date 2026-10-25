@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // BuildEstate Premium Navy + Warm Ivory + Muted Gold
+        // Aavasa Premium Navy + Warm Ivory + Muted Gold
         cream: {
           DEFAULT: '#F7F5F0',
           50: '#FBFAF7',

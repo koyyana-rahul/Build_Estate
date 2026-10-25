@@ -11,7 +11,7 @@ import { useSEO } from '../hooks/useSEO';
 import type { Property } from './PropertiesPage';
 
 const SavedPropertiesPage: React.FC = () => {
-  useSEO({ title: 'Saved Properties', description: 'View properties saved to your BuildEstate account.', noindex: true });
+  useSEO({ title: 'Saved Properties', description: 'View properties saved to your Aavasa account.', noindex: true });
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth();
   const [properties, setProperties] = useState<Property[]>([]);

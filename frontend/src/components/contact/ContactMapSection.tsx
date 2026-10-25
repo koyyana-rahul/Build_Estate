@@ -23,7 +23,7 @@ const ContactMapSection: React.FC = () => {
               </span>
               <div className="text-left">
                 <p className="font-syne font-bold text-base text-[#253247] mb-0.5">
-                  BuildEstate Office
+                  Aavasa Office
                 </p>
                 <p className="font-manrope font-extralight text-xs text-[#687386]">
                   Click to view on Google Maps

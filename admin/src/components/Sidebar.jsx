@@ -120,7 +120,7 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
           <Link
             to="/dashboard"
             className={cn('flex items-center gap-3 group', isCollapsed && 'lg:hidden')}
-            aria-label="BuildEstate dashboard"
+            aria-label="Aavasa dashboard"
           >
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -131,7 +131,7 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
               </motion.div>
               <div>
                 <span className="text-base font-bold text-[#f7f5f0] tracking-tight">
-                  BuildEstate
+                  Aavasa
                 </span>
                 <div className="text-[10px] text-white/60 font-medium uppercase tracking-widest leading-none">
                   Admin Panel
@@ -141,7 +141,7 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
           <Link
             to="/dashboard"
             className={cn('items-center justify-center w-full', !isCollapsed ? 'hidden' : 'lg:flex')}
-            aria-label="BuildEstate dashboard"
+            aria-label="Aavasa dashboard"
           >
               <motion.div
                 whileHover={{ scale: 1.05 }}

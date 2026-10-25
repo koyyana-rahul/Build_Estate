@@ -84,7 +84,7 @@ function daysUntilExpiry(expiresAt: string): number {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const MyListingsPage: React.FC = () => {
-  useSEO({ title: 'My Listings', description: 'Manage your BuildEstate property listings.', noindex: true });
+  useSEO({ title: 'My Listings', description: 'Manage your Aavasa property listings.', noindex: true });
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth();
 

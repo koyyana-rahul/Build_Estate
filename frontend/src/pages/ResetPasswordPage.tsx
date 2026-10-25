@@ -7,7 +7,7 @@ import { userAPI } from '../services/api';
 import { useSEO } from '../hooks/useSEO';
 
 const ResetPasswordPage: React.FC = () => {
-  useSEO({ title: 'Reset Password', description: 'Set a new password for your BuildEstate account.', noindex: true });
+  useSEO({ title: 'Reset Password', description: 'Set a new password for your Aavasa account.', noindex: true });
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
   const [password, setPassword] = useState('');

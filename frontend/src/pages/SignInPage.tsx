@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useSEO } from '../hooks/useSEO';
 
 const SignInPage: React.FC = () => {
-  useSEO({ title: 'Sign In', description: 'Sign in to your BuildEstate account.', noindex: true });
+  useSEO({ title: 'Sign In', description: 'Sign in to your Aavasa account.', noindex: true });
   const navigate = useNavigate();
   const { login } = useAuth();
   const [error, setError] = useState<string | null>(null);
