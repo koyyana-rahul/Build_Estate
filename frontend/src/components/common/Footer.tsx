@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, MapPin, Phone, Mail, Home } from 'lucide-react';
+import { newsAPI } from '../../services/api';
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
+  const [newsletterState, setNewsletterState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Newsletter signup:', email);
-    // TODO: Submit to backend
-    setEmail('');
+    setNewsletterState('loading');
+    try {
+      await newsAPI.subscribe(email);
+      setEmail('');
+      setNewsletterState('success');
+    } catch {
+      setNewsletterState('error');
+    }
   };
 
   return (
     <footer className="bg-foreground text-primary-foreground">
-      <div className="max-w-[1280px] mx-auto px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 mb-12">
           {/* Brand Column */}
           <div>
-            <Link to="/" className="flex items-center gap-2.5 mb-8" onClick={(e) => { e.preventDefault(); window.scrollTo(0, 0); }}>
+            <Link to="/" className="flex items-center gap-2.5 mb-8">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <Home className="w-5 h-5" />
               </div>
@@ -62,16 +69,19 @@ const Footer: React.FC = () => {
                 { to: '/ai-hub', label: 'AI Property Hub' },
                 { to: '/about', label: 'About Us' },
                 { to: '/contact', label: 'Contact' },
-                { href: '#', label: 'Careers' },
-                { href: '#', label: 'Blog' },
+                { href: 'mailto:koyyanarahul4002@gmail.com?subject=Careers%20at%20Aavasa', label: 'Careers' },
+                { to: '/properties', label: 'Market Updates' },
               ].map((item) => (
-                <li key={item.to ?? item.label}>
-                  <a
-                    href={item.to ?? item.label}
-                    className="text-sm text-muted-foreground hover:text-primary-foreground hover:pl-1 transition-colors inline-block"
-                  >
-                    {item.label}
-                  </a>
+                <li key={item.label}>
+                  {item.to ? (
+                    <Link to={item.to} className="text-sm text-muted-foreground hover:text-primary-foreground hover:pl-1 transition-colors inline-block">
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a href={item.href} className="text-sm text-muted-foreground hover:text-primary-foreground hover:pl-1 transition-colors inline-block">
+                      {item.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -99,8 +109,8 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 flex-shrink-0 text-primary" />
-                <a href="mailto:hello@buildestate.com" className="text-sm text-muted-foreground hover:text-primary-foreground transition-colors">
-                  hello@buildestate.com
+                <a href="mailto:koyyanarahul4002@gmail.com" className="text-sm text-muted-foreground hover:text-primary-foreground transition-colors">
+                  koyyanarahul4002@gmail.com
                 </a>
               </li>
             </ul>
@@ -125,13 +135,18 @@ const Footer: React.FC = () => {
               />
               <button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary-hover text-primary-foreground text-sm font-semibold px-4 py-3 rounded-lg transition-colors shadow-sm hover:shadow-md"
+                disabled={newsletterState === 'loading'}
+                className="w-full bg-primary hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed text-primary-foreground text-sm font-semibold px-4 py-3 rounded-lg transition-colors shadow-sm hover:shadow-md"
               >
-                Subscribe
+                {newsletterState === 'loading' ? 'Subscribing...' : 'Subscribe'}
               </button>
             </form>
-            <p className="text-xs text-muted-foreground/70 mt-3">
-              We respect your privacy. Unsubscribe anytime.
+            <p className={`text-xs mt-3 ${newsletterState === 'error' ? 'text-red-300' : newsletterState === 'success' ? 'text-emerald-300' : 'text-muted-foreground/70'}`}>
+              {newsletterState === 'success'
+                ? 'You are subscribed. Check your inbox for confirmation.'
+                : newsletterState === 'error'
+                  ? 'Subscription failed. Please try again.'
+                  : 'We respect your privacy. Unsubscribe anytime.'}
             </p>
           </div>
         </div>
@@ -149,13 +164,13 @@ const Footer: React.FC = () => {
                 'Cookie Policy',
                 'Sitemap',
               ].map((label) => (
-                <a
+                <Link
                   key={label}
-                  href="#"
+                  to="/contact"
                   className="text-sm text-muted-foreground hover:text-primary-foreground transition-colors"
                 >
                   {label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
