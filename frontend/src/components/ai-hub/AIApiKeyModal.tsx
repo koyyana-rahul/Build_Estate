@@ -77,7 +77,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
             </div>
             <div>
               <h2 className="font-syne font-bold text-white text-lg">Firecrawl API Key</h2>
-              <p className="font-manrope text-xs text-white/40">Saved in your browser only — never sent to our servers.</p>
+              <p className="font-manrope text-xs text-white/40">Only needed when the server has no Firecrawl key configured.</p>
             </div>
           </div>
           <button onClick={onClose} className="text-white/40 hover:text-white transition-[color]">

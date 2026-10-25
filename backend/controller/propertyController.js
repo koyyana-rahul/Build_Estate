@@ -144,7 +144,9 @@ export async function getLocalitySuggestions(req, res) {
  * User can request a specific model via req.body.model (slug); it is placed first.
  */
 async function resolveServices(req) {
-    const firecrawlKey    = req.headers['x-firecrawl-key']?.trim() || null;
+    const firecrawlKey    = req.headers['x-firecrawl-key']?.trim()
+        || process.env.FIRECRAWL_API_KEY?.trim()
+        || null;
     const serverGithubKey = process.env.GITHUB_MODELS_API_KEY?.trim() || null;
     const serverNvidiaKey = process.env.NVIDIA_API_KEY?.trim()      || null;
 
@@ -598,7 +600,9 @@ export const getLocationTrends = async (req, res) => {
 
 // Only Firecrawl key is validated here — AI keys are server-side env vars.
 export const validateApiKeys = async (req, res) => {
-    const firecrawlKey = req.headers['x-firecrawl-key']?.trim() || null;
+    const firecrawlKey = req.headers['x-firecrawl-key']?.trim()
+        || process.env.FIRECRAWL_API_KEY?.trim()
+        || null;
 
     if (!firecrawlKey) {
         return res.status(403).json({
@@ -630,6 +634,13 @@ export const validateApiKeys = async (req, res) => {
             error: isNetwork ? 'KEY_VALIDATION_FAILED' : 'KEYS_INVALID',
         });
     }
+};
+
+export const getAIConfig = (req, res) => {
+    res.json({
+        success: true,
+        firecrawlConfigured: Boolean(process.env.FIRECRAWL_API_KEY?.trim()),
+    });
 };
 
 // ── User property listing CRUD ────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
-import { searchProperties, getLocationTrends, getLocalitySuggestions, createUserListing, getUserListings, updateUserListing, deleteUserListing, validateApiKeys, getCacheStats } from '../controller/propertyController.js';
+import { searchProperties, getLocationTrends, getLocalitySuggestions, createUserListing, getUserListings, updateUserListing, deleteUserListing, validateApiKeys, getAIConfig, getCacheStats } from '../controller/propertyController.js';
 import { getPublicModels } from '../controller/aiModelController.js';
 import { transformAISearchRequest } from '../middleware/transformRequest.js';
 import { protect, adminProtect } from '../middleware/authMiddleware.js';
@@ -36,6 +36,7 @@ router.post('/ai/search', aiLimiter, transformAISearchRequest, searchProperties)
 
 // Validate user-provided API keys before save/use
 router.post('/ai/validate-keys', validateApiKeys);
+router.get('/ai/config', getAIConfig);
 
 // Locality autocomplete — harvested from cached scraped data, no AI keys needed
 router.get('/ai/localities', getLocalitySuggestions);

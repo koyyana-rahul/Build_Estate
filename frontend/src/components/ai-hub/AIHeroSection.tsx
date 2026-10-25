@@ -86,6 +86,11 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
 
   // Load available AI models once
   useEffect(() => {
+    aiAPI.getConfig().then((res: { data: { firecrawlConfigured?: boolean } }) => {
+      if (res.data?.firecrawlConfigured) setKeysReady(true);
+    }).catch(() => {
+      // A local key can still enable the search if the config endpoint is unavailable.
+    });
     aiAPI.getModels().then((res: { data: { models: AIModelOption[] } }) => {
       const models: AIModelOption[] = res.data?.models || [];
       setAvailableModels(models);

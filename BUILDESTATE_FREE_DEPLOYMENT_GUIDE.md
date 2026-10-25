@@ -66,7 +66,7 @@ CLOUDINARY_API_SECRET=<Cloudinary API secret>
 
 ```text
 EXTRA_ALLOWED_ORIGINS=<comma-separated additional origins>
-FIRECRAWL_API_KEY=<server-side Firecrawl key if used>
+FIRECRAWL_API_KEY=<server-side Firecrawl key>
 GITHUB_MODELS_API_KEY=<GitHub Models key if used>
 NVIDIA_API_KEY=<NVIDIA key if used>
 RATE_LIMIT_WINDOW_MS=3600000

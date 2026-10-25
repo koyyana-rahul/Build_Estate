@@ -187,6 +187,7 @@ export const appointmentsAPI = {
 // AI-Powered Property Search
 // AI keys are server-side — users only supply their Firecrawl key.
 export const aiAPI = {
+  getConfig: () => apiClient.get<{ firecrawlConfigured: boolean }>('/ai/config'),
   getModels: () => apiClient.get('/ai/models'),
 
   search: (data: {
