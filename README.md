@@ -29,11 +29,10 @@
 
 <br/>
 
-[![Stars](https://img.shields.io/github/stars/AAYUSH412/Real-Estate-Website?style=social)](https://github.com/AAYUSH412/Real-Estate-Website)
-[![Forks](https://img.shields.io/github/forks/AAYUSH412/Real-Estate-Website?style=social)](https://github.com/AAYUSH412/Real-Estate-Website/fork)
-[![License](https://img.shields.io/github/license/AAYUSH412/Real-Estate-Website?color=green)](LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/AAYUSH412/Real-Estate-Website?color=orange)](https://github.com/AAYUSH412/Real-Estate-Website/commits)
-[![Issues](https://img.shields.io/github/issues/AAYUSH412/Real-Estate-Website)](https://github.com/AAYUSH412/Real-Estate-Website/issues)
+[![Forks](https://img.shields.io/github/forks/koyyana-rahul/Build_Estate?style=social)](https://github.com/koyyana-rahul/Build_Estate/fork)
+[![License](https://img.shields.io/github/license/koyyana-rahul/Build_Estate?color=green)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/koyyana-rahul/Build_Estate?color=orange)](https://github.com/koyyana-rahul/Build_Estate/commits)
+[![Issues](https://img.shields.io/github/issues/koyyana-rahul/Build_Estate)](https://github.com/koyyana-rahul/Build_Estate/issues)
 
 </div>
 
@@ -459,8 +458,8 @@ flowchart LR
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/AAYUSH412/Real-Estate-Website.git
-cd Real-Estate-Website
+git clone https://github.com/koyyana-rahul/Build_Estate.git
+cd Build_Estate
 
 # Install dependencies per app:
 cd backend && npm install
@@ -881,19 +880,14 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-  <img src="https://avatars.githubusercontent.com/AAYUSH412" width="100" style="border-radius:50%"/>
+  <img src="https://avatars.githubusercontent.com/koyyana-rahul" width="100" style="border-radius:50%"/>
 
-### Aayush Vaghela
+### Koyyana Rahul
 
-[![GitHub](https://img.shields.io/badge/@AAYUSH412-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AAYUSH412)
-[![Portfolio](https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=firefox&logoColor=white)](https://aayush-vaghela.vercel.app/)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:aayushvaghela412@gmail.com)
+[![GitHub](https://img.shields.io/badge/@koyyana--rahul-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/koyyana-rahul)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:koyyanarahul4002@gmail.com)
 
 <br/>
-
-If this project helped you, please give it a ⭐
-
-[![Star](https://img.shields.io/github/stars/AAYUSH412/Real-Estate-Website?style=for-the-badge&logo=github&color=FFD700)](https://github.com/AAYUSH412/Real-Estate-Website)
 
 </div>
 
