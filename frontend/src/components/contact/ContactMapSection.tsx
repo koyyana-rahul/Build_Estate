@@ -17,7 +17,7 @@ const ContactMapSection: React.FC = () => {
           
           {/* Map Overlay Button */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <button className="mx-4 max-w-[calc(100%-2rem)] bg-white shadow-2xl rounded-xl px-4 sm:px-8 py-4 flex items-center gap-3 hover:shadow-3xl transition-shadow group">
+            <a href="https://www.google.com/maps/search/?api=1&query=502%20Devpath%20Building%20Ashram%20Road%20Ahmedabad" target="_blank" rel="noopener noreferrer" className="mx-4 max-w-[calc(100%-2rem)] bg-white shadow-2xl rounded-xl px-4 sm:px-8 py-4 flex items-center gap-3 hover:shadow-3xl transition-shadow group">
               <span className="material-icons text-2xl text-[#142c4e] group-hover:scale-110 transition-transform">
                 location_on
               </span>
@@ -32,7 +32,7 @@ const ContactMapSection: React.FC = () => {
               <span className="material-icons text-[#142c4e]">
                 arrow_forward
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

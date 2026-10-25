@@ -73,7 +73,7 @@ const AboutHeritageSection: React.FC = () => {
 
             {/* Link */}
             <a 
-              href="#team" 
+              href="mailto:koyyanarahul4002@gmail.com?subject=Meet%20the%20Aavasa%20team"
               className="inline-flex items-center gap-2 border-b border-[#253247] pb-1 group hover:border-[#142c4e] transition-[border-color]"
             >
               <span className="font-space-mono text-sm text-[#253247] group-hover:text-[#142c4e] transition-[color]">

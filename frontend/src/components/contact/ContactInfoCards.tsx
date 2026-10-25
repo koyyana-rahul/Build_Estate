@@ -21,7 +21,7 @@ const ContactInfoCards: React.FC = () => {
               Ashram Road, Ahmedabad
             </p>
             <a 
-              href="https://maps.google.com" 
+              href="https://www.google.com/maps/search/?api=1&query=502%20Devpath%20Building%20Ashram%20Road%20Ahmedabad" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 font-manrope font-medium text-sm text-[#142c4e] hover:text-[#142c4e] transition-[color]"
@@ -58,7 +58,7 @@ const ContactInfoCards: React.FC = () => {
                 <span>+91 98765 43210</span>
               </a>
               <a 
-                href="mailto:hello@buildestate.com" 
+                href="mailto:koyyanarahul4002@gmail.com" 
                 className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#253247] hover:text-[#142c4e] transition-[color]"
               >
                 <span className="material-icons text-base">

@@ -102,7 +102,7 @@ const FAQSection: React.FC = () => {
         {/* View All Questions Link */}
         <div className="text-center mt-12">
           <a 
-            href="#" 
+            href="mailto:koyyanarahul4002@gmail.com?subject=Aavasa%20help%20question" 
             className="inline-flex items-center gap-2 font-manrope font-bold text-base text-[#142c4e] hover:text-[#142c4e] transition-[color] group"
           >
             <span>Get Full Knowledge Base</span>

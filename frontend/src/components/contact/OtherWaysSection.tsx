@@ -21,18 +21,18 @@ const OtherWaysSection: React.FC = () => {
     },
     {
       icon: 'chat_bubble',
-      title: 'Live Chat',
-      description: 'Connect with a property expert instantly through our live chat feature.',
-      action: 'Launch Chat',
-      actionLink: '#',
+      title: 'Email Support',
+      description: 'Send us your questions and our team will respond as soon as possible.',
+      action: 'Send an Email',
+      actionLink: 'mailto:koyyanarahul4002@gmail.com',
       bgColor: 'bg-[#ecf2f7]'
     },
     {
       icon: 'event',
-      title: 'Schedule a Call',
-      description: 'Book a convenient time for a detailed consultation with our specialists.',
-      action: 'Book Now',
-      actionLink: '#',
+      title: 'Call the Team',
+      description: 'Speak with a property expert about your next move.',
+      action: 'Call Now',
+      actionLink: 'tel:+919876543210',
       bgColor: 'bg-[#fbf4e8]'
     }
   ];

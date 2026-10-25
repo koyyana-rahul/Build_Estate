@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check, ArrowRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AboutAISection: React.FC = () => {
   const imgVerticalArchitecturalDetail = "https://images.unsplash.com/photo-1695067440629-b5e513976100?w=600";
@@ -57,8 +58,8 @@ const AboutAISection: React.FC = () => {
             </ul>
 
             {/* Link */}
-            <a 
-              href="#" 
+            <Link 
+              to="/ai-hub"
               className="inline-flex items-center gap-2 border-b border-[#253247] pb-1 group hover:border-[#142c4e] transition-[border-color]"
             >
               <span className="font-space-mono text-sm text-[#253247] group-hover:text-[#142c4e] transition-[color]">
@@ -66,7 +67,7 @@ const AboutAISection: React.FC = () => {
               </span>
 
               <ArrowRight className="w-4 h-4 text-[#253247] group-hover:text-[#142c4e] transition-[color]" />
-            </a>
+            </Link>
           </div>
 
           {/* Right - Image with AI Card Overlay */}
