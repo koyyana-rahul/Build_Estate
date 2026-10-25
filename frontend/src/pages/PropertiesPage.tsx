@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, SearchX } from 'lucide-react';
 import Navbar from '../components/common/Navbar';
@@ -40,14 +40,15 @@ const PropertiesPage: React.FC = () => {
   const [sortBy, setSortBy] = useState('featured');
   const [filters, setFilters] = useState<FilterState>({});
 
-  useEffect(() => {
-    const fetchProperties = async () => {
+  const fetchProperties = useCallback(async () => {
       try {
         setLoading(true);
         setError(null);
         const { data } = await propertiesAPI.getAll();
-        if (data.success && data.property) {
+        if (data.success && Array.isArray(data.property)) {
           setProperties(data.property);
+        } else {
+          setProperties([]);
         }
       } catch (err: any) {
         console.error('Failed to fetch properties:', err);
@@ -55,9 +56,11 @@ const PropertiesPage: React.FC = () => {
       } finally {
         setLoading(false);
       }
-    };
+    }, []);
+
+  useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [fetchProperties]);
 
   const filteredProperties = useMemo(() => {
     let result = [...properties];
@@ -148,7 +151,7 @@ const PropertiesPage: React.FC = () => {
               Unable to load properties
             </h2>
             <p className="text-muted-foreground mb-6">{error}</p>
-            <Button onClick={() => window.location.reload()}>Retry</Button>
+            <Button onClick={fetchProperties}>Retry</Button>
           </div>
         </div>
       )}
@@ -166,7 +169,8 @@ const PropertiesPage: React.FC = () => {
             <h2 className="font-heading text-xl font-semibold text-foreground mb-2">
               No properties found
             </h2>
-            <p className="text-muted-foreground">Try adjusting your filters</p>
+            <p className="text-muted-foreground mb-5">Try adjusting your filters or search for another location.</p>
+            <Button variant="outline" onClick={() => setFilters({})}>Clear filters</Button>
           </div>
         </motion.div>
       )}

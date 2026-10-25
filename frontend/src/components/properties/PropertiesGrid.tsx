@@ -49,9 +49,9 @@ const PropertyRow: React.FC<{ property: Property; index: number }> = ({ property
       className="group block outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xl"
       aria-label={property.title}
     >
-      <div className="bg-card border border-border rounded-xl shadow-card hover:shadow-md transition-all duration-200 flex gap-0">
+      <div className="bg-card border border-border rounded-xl shadow-card hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row gap-0 overflow-hidden">
         {/* Thumbnail */}
-        <div className="relative w-52 shrink-0 overflow-hidden bg-muted">
+        <div className="relative w-full h-52 sm:w-52 sm:h-auto shrink-0 overflow-hidden bg-muted">
           <img
             src={img}
             alt={property.title}
@@ -74,23 +74,23 @@ const PropertyRow: React.FC<{ property: Property; index: number }> = ({ property
         </div>
 
         {/* Content */}
-        <div className="flex-1 px-6 py-5 flex flex-col justify-between">
+        <div className="flex-1 min-w-0 px-4 sm:px-6 py-4 sm:py-5 flex flex-col justify-between">
           <div>
-            <h3 className="font-heading text-lg font-semibold text-foreground leading-tight mb-1">
+            <h3 className="font-heading text-lg font-semibold text-foreground leading-tight mb-1 line-clamp-2">
               {property.title}
             </h3>
             <div className="flex items-center gap-1 mb-3">
               <MapPin className="w-3.5 h-3.5 text-primary shrink-0" aria-hidden="true" />
               <span className="text-sm text-muted-foreground truncate">{property.location}</span>
             </div>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground tabular-nums">
+            <div className="flex items-center gap-3 sm:gap-4 flex-wrap text-sm text-muted-foreground tabular-nums">
               <span className="flex items-center gap-1.5"><Bed className="w-3.5 h-3.5 text-primary" />{property.beds} {property.beds === 1 ? 'Bed' : 'Beds'}</span>
               <span className="flex items-center gap-1.5"><Bath className="w-3.5 h-3.5 text-primary" />{property.baths} {property.baths === 1 ? 'Bath' : 'Baths'}</span>
               <span className="flex items-center gap-1.5"><Maximize2 className="w-3.5 h-3.5 text-primary" />{property.sqft.toLocaleString()} sqft</span>
             </div>
           </div>
           <div className="flex items-center justify-between mt-4">
-            <p className="font-heading text-2xl font-bold text-primary tabular-nums">
+            <p className="font-heading text-xl sm:text-2xl font-bold text-primary tabular-nums">
               {formatPrice(property.price)}
             </p>
             {property.type && (
@@ -107,13 +107,13 @@ const PropertyRow: React.FC<{ property: Property; index: number }> = ({ property
 
 const PropertiesGrid: React.FC<PropertiesGridProps> = ({ properties, viewMode = 'grid' }) => {
   return (
-    <div className="max-w-[1440px] mx-auto px-6 pb-16 pt-4">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 pb-16 pt-4">
       {viewMode === 'grid' ? (
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+          className="grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5"
         >
           {properties.map((property, index) => (
             <motion.div key={property._id} variants={item}>

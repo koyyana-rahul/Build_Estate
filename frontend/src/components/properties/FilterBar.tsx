@@ -51,6 +51,14 @@ const Dropdown: React.FC<{
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, []);
+
   return (
     <div ref={ref} className="relative">
       <button
@@ -72,7 +80,7 @@ const Dropdown: React.FC<{
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.98 }}
             transition={{ duration: 0.15, ease: [0.2, 0, 0, 1] }}
-            className="absolute top-full left-0 mt-2 z-30 bg-white border border-[#e5e7eb] rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.10)] min-w-[220px]"
+            className="absolute top-full left-0 mt-2 z-30 bg-white border border-[#e5e7eb] rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.10)] min-w-[220px] max-w-[calc(100vw-2rem)]"
           >
             {children}
           </motion.div>
@@ -141,14 +149,14 @@ const FilterBar: React.FC<FilterBarProps> = ({
     setSelectedAmenities(p => p.includes(a) ? p.filter(x => x !== a) : [...p, a]);
 
   return (
-    <div className="bg-white border-b border-[#e5e7eb] sticky top-[72px] z-20">
-      <div className="max-w-[1440px] mx-auto px-6 py-3">
+    <div className="bg-white border-b border-[#e5e7eb] sticky top-[64px] sm:top-[72px] z-20">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-3">
 
         {/* ── Top row: search + filters + sort + view ── */}
         <div className="flex items-center gap-2 flex-wrap">
 
           {/* Location search */}
-          <div className="relative flex-1 min-w-[200px] max-w-[280px]">
+          <div className="relative basis-full sm:flex-1 sm:min-w-[200px] sm:max-w-[280px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#687386]" aria-hidden />
             <input
               type="text"
@@ -165,7 +173,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           </div>
 
           {/* Buy / Rent toggle */}
-          <div className="flex items-center gap-1 h-10 bg-[#f7f5f0] rounded-xl p-1">
+          <div className="flex items-center gap-1 h-10 bg-[#f7f5f0] rounded-xl p-1 shrink-0">
             {['buy', 'rent'].map(a => (
               <button
                 key={a}
@@ -277,30 +285,41 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
             <AnimatePresence>
               {showMoreFilters && (
-                <motion.div
-                  initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 4, scale: 0.98 }}
-                  transition={{ duration: 0.15, ease: [0.2, 0, 0, 1] }}
-                  className="absolute top-full right-0 mt-2 z-30 bg-white border border-[#e5e7eb] rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.10)] w-[300px] p-4"
-                >
-                  <p className="font-manrope font-semibold text-xs text-[#253247] uppercase tracking-wider mb-3">Amenities</p>
-                  <div className="grid grid-cols-2 gap-1.5 max-h-64 overflow-y-auto">
-                    {AMENITIES.map(a => (
-                      <button
-                        key={a}
-                        onClick={() => toggleAmenity(a)}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-xl font-manrope text-xs text-left transition-all duration-200 ${
-                          selectedAmenities.includes(a)
-                            ? 'bg-[#253247] text-white'
-                            : 'bg-[#f7f5f0] text-[#253247] hover:bg-[#f7f5f0]'
-                        }`}
-                      >
-                        {a}
+                <>
+                  <div className="fixed inset-0 z-20 bg-[#253247]/30 sm:hidden" aria-hidden="true" />
+                  <motion.div
+                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.15, ease: [0.2, 0, 0, 1] }}
+                    className="fixed inset-x-0 bottom-0 z-30 bg-white border border-[#e5e7eb] rounded-t-2xl shadow-[0_-8px_30px_rgba(0,0,0,0.12)] max-h-[min(76dvh,520px)] overflow-y-auto p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:absolute sm:inset-x-auto sm:bottom-auto sm:top-full sm:right-0 sm:mt-2 sm:max-h-none sm:w-[min(300px,calc(100vw-2rem))] sm:rounded-2xl sm:shadow-[0_8px_30px_rgba(0,0,0,0.10)]"
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="font-manrope font-semibold text-xs text-[#253247] uppercase tracking-wider">More filters</p>
+                      <button type="button" onClick={() => setShowMoreFilters(false)} className="p-1 text-[#687386] sm:hidden" aria-label="Close more filters">
+                        <X className="w-4 h-4" />
                       </button>
-                    ))}
-                  </div>
-                </motion.div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {AMENITIES.map(a => (
+                        <button
+                          key={a}
+                          onClick={() => toggleAmenity(a)}
+                          className={`flex items-center gap-2 px-3 py-2 rounded-xl font-manrope text-xs text-left transition-all duration-200 ${
+                            selectedAmenities.includes(a)
+                              ? 'bg-[#253247] text-white'
+                              : 'bg-[#f7f5f0] text-[#253247] hover:bg-[#f7f5f0]'
+                          }`}
+                        >
+                          {a}
+                        </button>
+                      ))}
+                    </div>
+                    <button type="button" onClick={() => setShowMoreFilters(false)} className="w-full h-10 mt-4 rounded-xl bg-[#253247] text-white font-manrope text-sm font-semibold sm:hidden">
+                      Apply filters
+                    </button>
+                  </motion.div>
+                </>
               )}
             </AnimatePresence>
           </div>
@@ -316,10 +335,10 @@ const FilterBar: React.FC<FilterBarProps> = ({
           )}
 
           {/* Spacer */}
-          <div className="flex-1" />
+          <div className="hidden sm:block flex-1" />
 
           {/* Count */}
-          <span className="font-manrope text-sm text-[#687386] whitespace-nowrap">
+          <span className="order-10 basis-full sm:order-none sm:basis-auto font-manrope text-sm text-[#687386] whitespace-nowrap">
             {totalProperties} {totalProperties === 1 ? 'property' : 'properties'}
           </span>
 
@@ -327,7 +346,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           <select
             value={sortBy}
             onChange={e => onSortChange?.(e.target.value)}
-            className="h-10 bg-white border border-[#e5e7eb] rounded-xl px-3 pr-7 font-manrope text-sm text-[#253247] cursor-pointer focus:outline-none focus:border-[#142c4e] appearance-none transition-[border-color]"
+            className="h-10 min-w-0 flex-1 sm:flex-none bg-white border border-[#e5e7eb] rounded-xl px-3 pr-7 font-manrope text-sm text-[#253247] cursor-pointer focus:outline-none focus:border-[#142c4e] appearance-none transition-[border-color]"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236B7280' d='M5 7L1 3h8z'/%3E%3C/svg%3E")`,
               backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.6rem center'
@@ -341,7 +360,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           </select>
 
           {/* View toggle */}
-          <div className="flex items-center gap-0.5 h-10 bg-[#f7f5f0] rounded-xl p-1">
+          <div className="flex items-center gap-0.5 h-10 bg-[#f7f5f0] rounded-xl p-1 shrink-0">
             {(['grid', 'list'] as const).map(m => (
               <button
                 key={m}
