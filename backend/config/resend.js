@@ -8,15 +8,28 @@ dotenv.config({ path: resolve(backendDirectory, '../.env.local') });
 dotenv.config({ path: resolve(backendDirectory, '../.env') });
 
 const getApiKey = () => process.env.RESEND_API_KEY?.trim();
-const getFromAddress = () => (
-  process.env.RESEND_FROM_EMAIL?.trim() ||
-  process.env.EMAIL_USER?.trim()
-);
+const getFromAddress = () => process.env.RESEND_FROM_EMAIL?.trim();
 
-const resend = new Resend(getApiKey());
+let resendClient;
+
+const getResendClient = () => {
+  const apiKey = getApiKey();
+
+  if (!apiKey) {
+    return null;
+  }
+
+  if (!resendClient) {
+    resendClient = new Resend(apiKey);
+  }
+
+  return resendClient;
+};
 
 export const sendEmail = async ({ to, subject, html, from = getFromAddress() }) => {
-  if (!getApiKey()) {
+  const resend = getResendClient();
+
+  if (!resend) {
     throw new Error('Missing RESEND_API_KEY. Cannot send email.');
   }
   if (!from) {
@@ -42,7 +55,9 @@ export const sendEmail = async ({ to, subject, html, from = getFromAddress() }) 
 };
 
 export const checkEmailHealth = async () => {
-  if (!getApiKey()) {
+  const resend = getResendClient();
+
+  if (!resend) {
     return { status: 'error', message: 'RESEND_API_KEY not configured' };
   }
   if (!getFromAddress()) {
@@ -60,4 +75,4 @@ export const checkEmailHealth = async () => {
   };
 };
 
-export default resend;
+export default getResendClient;

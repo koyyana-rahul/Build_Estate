@@ -24,7 +24,7 @@ import {
 
 class EmailService {
   constructor() {
-    this.fromAddress = process.env.RESEND_FROM_EMAIL || process.env.EMAIL_USER || 'onboarding@resend.dev';
+    this.fromAddress = process.env.RESEND_FROM_EMAIL?.trim();
   }
 
   /**
